@@ -379,13 +379,17 @@ export default function Index() {
             Join leading Algerian banks that trust BankGenie AI to deliver exceptional customer service.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="h-12 px-8">
-              Start Free Trial
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="lg" className="h-12 px-8">
-              Schedule Demo
-            </Button>
+            <Link to="/kyc">
+              <Button size="lg" className="h-12 px-8">
+                Start KYC Process
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/admin">
+              <Button variant="outline" size="lg" className="h-12 px-8">
+                Admin Dashboard
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
