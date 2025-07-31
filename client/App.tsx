@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import LoanSimulator from "./pages/LoanSimulator";
 import Login from "./pages/Login";
 import KYC from "./pages/KYC";
+import FraudMonitoring from "./pages/FraudMonitoring";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
