@@ -120,13 +120,17 @@ export default function Index() {
               self-service platforms. Supporting Arabic, French, and Algerian Derja.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="h-12 px-8">
-                Start Free Trial
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="lg" className="h-12 px-8">
-                Watch Demo
-              </Button>
+              <Link to="/chat">
+                <Button size="lg" className="h-12 px-8">
+                  Try AI Assistant
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/loan-simulator">
+                <Button variant="outline" size="lg" className="h-12 px-8">
+                  Loan Calculator
+                </Button>
+              </Link>
             </div>
           </div>
 
