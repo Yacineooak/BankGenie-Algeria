@@ -92,8 +92,12 @@ export default function Index() {
               <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
               <a href="#security" className="text-muted-foreground hover:text-foreground transition-colors">Security</a>
               <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
-              <Button variant="outline" size="sm">Login</Button>
-              <Button size="sm">Get Started</Button>
+              <Link to="/login">
+                <Button variant="outline" size="sm">Login</Button>
+              </Link>
+              <Link to="/chat">
+                <Button size="sm">Try ChatBot</Button>
+              </Link>
             </div>
           </div>
         </div>
