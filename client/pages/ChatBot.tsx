@@ -199,11 +199,11 @@ export default function ChatBot() {
         // Handle special intents with real data
         await handleSpecialIntents(result.data.intent, botMessage);
       } else {
-        addErrorMessage("عذراً، حدث خطأ في مع��لجة طلبك. يرجى المحاولة مرة أخرى.");
+        addErrorMessage("عذراً، حدث خطأ في معالجة طلبك. يرجى المحاولة مرة أخرى.");
       }
     } catch (error) {
       console.error('Chat processing error:', error);
-      addErrorMessage("عذراً، الخدمة غير متاحة حالياً. يرجى المحاولة لاحقاً.");
+      addErrorMessage("عذراً، الخدمة ��ير متاحة حالياً. يرجى المحاولة لاحقاً.");
     } finally {
       setIsTyping(false);
     }
@@ -341,7 +341,7 @@ export default function ChatBot() {
           `⏰ معدل التشغيل: ${data.data.uptime}%\n` +
           `📊 إجمالي العمليات: ${data.data.totalTransactions.toLocaleString()}\n` +
           `🛡️ معدل اكتشاف الاحتيال: ${data.data.fraudDetectionRate}%\n` +
-          `���� البنوك المتصلة: ${data.data.bankConnectivity.filter((b: any) => b.status === 'ONLINE').length}/8`;
+          `🏦 البنوك المتصلة: ${data.data.bankConnectivity.filter((b: any) => b.status === 'ONLINE').length}/8`;
         
         const statusMessage: Message = {
           id: Date.now().toString(),
@@ -384,7 +384,7 @@ export default function ChatBot() {
   // Auto-detect language
   const detectLanguage = (text: string): 'ar' | 'fr' | 'dz' => {
     const arabicPattern = /[\u0600-\u06FF]/;
-    const frenchPattern = /[àâäçéèêëïîô��ûüÿ]/i;
+    const frenchPattern = /[àâäçéèêëïîôùûüÿ]/i;
     
     if (arabicPattern.test(text)) {
       const darija_patterns = ['راني', 'كيفاش', 'وين', 'شنو', 'بصح', 'يعني', 'برك'];
@@ -428,11 +428,11 @@ export default function ChatBot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Initialize with enhanced welcome message
+  // Initialize with professional welcome message
   useEffect(() => {
     const welcomeMessage: Message = {
       id: '0',
-      text: 'مرحباً بك في بنك جيني الذكي! 🏦\n\nأنا مساعدك البنكي المدعوم بالذكاء الاصطناعي والمتصل مباشرة بجميع البنوك الجزائرية.\n\n🔥 الجديد: بيانات حية وأسعار فورية!\n\nيمكنني مساعدتك في:\n✅ استعلام الرصيد الفوري\n✅ تاريخ العمليات المحدث\n✅ أسعار الصرف الحية\n✅ حالة النظام البنكي\n✅ محاكاة القروض\n✅ خدمات البطاقات\n\nكيف يمكنني مساعدتك اليوم؟',
+      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       sender: 'bot',
       timestamp: new Date()
     };
