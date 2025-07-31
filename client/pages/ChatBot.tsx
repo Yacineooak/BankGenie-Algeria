@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import { 
   Send, 
   Mic, 
@@ -18,18 +19,25 @@ import {
   Shield,
   Zap,
   TrendingUp,
-  AlertCircle
+  AlertCircle,
+  Copy,
+  Star,
+  PhoneCall,
+  MessageCircle,
+  Loader2,
+  Clock
 } from "lucide-react";
 
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: 'user' | 'bot' | 'system';
   timestamp: Date;
   language?: string;
   intent?: string;
   confidence?: number;
-  data?: any; // For rich responses with real data
+  data?: any;
+  type?: 'text' | 'balance' | 'transactions' | 'rates' | 'status' | 'error' | 'success';
 }
 
 interface RealTimeData {
@@ -48,6 +56,7 @@ export default function ChatBot() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [realTimeData, setRealTimeData] = useState<RealTimeData>({});
   const [wsConnection, setWsConnection] = useState<WebSocket | null>(null);
+  const [userRating, setUserRating] = useState<number>(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const languages = {
@@ -56,9 +65,27 @@ export default function ChatBot() {
     dz: { name: 'الدارجة', flag: '🇩🇿' }
   };
 
-  // Initialize WebSocket connection for real-time updates
+  // Professional banking responses
+  const professionalResponses = {
+    greeting: {
+      ar: "أهلاً وسهلاً، ك��ف يمكنني مساعدتك في خدماتك المصرفية اليوم؟",
+      fr: "Bonjour, comment puis-je vous aider avec vos services bancaires aujourd'hui?",
+      dz: "مرحبا، كيفاش نقدر نعاونك في خدماتك البنكية اليوم؟"
+    },
+    balance_success: {
+      ar: "تم استرجاع رصيد حسابك بنجاح. إليك التفاصيل:",
+      fr: "Votre solde a été récupéré avec succès. Voici les détails:",
+      dz: "تم جلب رصيد حسابك بنجاح. هاذي التفاصيل:"
+    },
+    error_professional: {
+      ar: "نعتذر لحدوث خطأ تقني. فريق الدعم الفني يعمل على حل المشكلة. يمكنك المحاولة مرة أخرى أو التواصل معنا.",
+      fr: "Nous nous excusons pour cette erreur technique. Notre équipe technique travaille à résoudre le problème. Vous pouvez réessayer ou nous contacter.",
+      dz: "نعتذرلك على هاذ الخطأ التقني. فريق الدعم يخدم على حل المشكل. ممكن تعاود المحاولة ولا تتواصل معانا."
+    }
+  };
+
+  // Initialize WebSocket and real-time data
   useEffect(() => {
-    // Check authentication status
     const user = localStorage.getItem('bankgenie_user');
     if (user) {
       setIsAuthenticated(true);
@@ -74,7 +101,6 @@ export default function ChatBot() {
 
   const initializeRealTimeConnection = async () => {
     try {
-      // Fetch initial real-time data
       const marketResponse = await fetch('/api/realtime/market-data');
       const systemResponse = await fetch('/api/realtime/system-status');
       
@@ -88,7 +114,6 @@ export default function ChatBot() {
         });
       }
 
-      // Initialize WebSocket for live updates (if available)
       try {
         const ws = new WebSocket(`ws://${window.location.host}/ws`);
         
@@ -98,16 +123,13 @@ export default function ChatBot() {
         };
         
         ws.onopen = () => {
-          console.log('Real-time connection established');
           setWsConnection(ws);
         };
         
         ws.onerror = () => {
-          console.log('WebSocket not available, using polling for updates');
           startPollingUpdates();
         };
       } catch (error) {
-        console.log('WebSocket not available, using polling for updates');
         startPollingUpdates();
       }
     } catch (error) {
@@ -116,7 +138,6 @@ export default function ChatBot() {
   };
 
   const startPollingUpdates = () => {
-    // Fallback to polling if WebSocket is not available
     setInterval(async () => {
       try {
         const response = await fetch('/api/realtime/market-data');
@@ -127,7 +148,7 @@ export default function ChatBot() {
       } catch (error) {
         console.error('Polling update failed:', error);
       }
-    }, 30000); // Poll every 30 seconds
+    }, 30000);
   };
 
   const handleRealTimeUpdate = (update: any) => {
@@ -140,13 +161,13 @@ export default function ChatBot() {
         break;
       case 'NEW_ALERT':
         if (update.data.severity === 'HIGH' || update.data.severity === 'CRITICAL') {
-          addSystemMessage(`تنبيه أمني: ${update.data.message}`, 'security_alert');
+          addSystemMessage("تم رصد نشاط مشبوه. فريق الأمان يراجع العملية.", 'security_alert');
         }
         break;
     }
   };
 
-  // Enhanced message processing with real banking APIs
+  // Enhanced message processing
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
 
@@ -155,7 +176,8 @@ export default function ChatBot() {
       text: inputText,
       sender: 'user',
       timestamp: new Date(),
-      language: detectLanguage(inputText)
+      language: detectLanguage(inputText),
+      type: 'text'
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -163,7 +185,6 @@ export default function ChatBot() {
     setIsTyping(true);
 
     try {
-      // Send to real-time chat processing API
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -191,25 +212,24 @@ export default function ChatBot() {
           timestamp: new Date(),
           intent: result.data.intent,
           confidence: result.data.confidence,
-          data: result.data.additionalData
+          data: result.data.additionalData,
+          type: 'text'
         };
 
         setMessages(prev => [...prev, botMessage]);
-
-        // Handle special intents with real data
         await handleSpecialIntents(result.data.intent, botMessage);
       } else {
-        addErrorMessage("عذراً، حدث خطأ في معالجة طلبك. يرجى المحاولة مرة أخرى.");
+        addErrorMessage("نعتذر لحدوث خطأ تقني. يرجى إعادة المحاولة أو التواصل مع خدمة العملاء.");
       }
     } catch (error) {
       console.error('Chat processing error:', error);
-      addErrorMessage("عذراً، الخدمة ��ير متاحة حالياً. يرجى المحاولة لاحقاً.");
+      addErrorMessage("الخدمة غير متاحة مؤقتاً. نعمل على إصلاح المشكلة، يرجى المحاولة خلال دقائق.");
     } finally {
       setIsTyping(false);
     }
   };
 
-  // Handle special intents with real banking data
+  // Handle special intents with enhanced responses
   const handleSpecialIntents = async (intent: string, botMessage: Message) => {
     switch (intent) {
       case 'balance_inquiry':
@@ -217,171 +237,175 @@ export default function ChatBot() {
           await fetchRealTimeBalance();
         }
         break;
-        
       case 'market_rates':
         await showCurrentMarketRates();
         break;
-        
       case 'transaction_history':
         if (isAuthenticated) {
           await fetchTransactionHistory();
         }
         break;
-        
       case 'system_status':
         await showSystemStatus();
         break;
     }
   };
 
-  // Fetch real-time account balance
+  // Enhanced balance display
   const fetchRealTimeBalance = async () => {
     try {
       const response = await fetch('/api/realtime/balance/0001234567890123', {
-        headers: {
-          'user-id': 'user_123'
-        }
+        headers: { 'user-id': 'user_123' }
       });
       
       if (response.ok) {
         const data = await response.json();
+        
         const balanceMessage: Message = {
           id: Date.now().toString(),
-          text: `رصيد حسابك الجاري: ${data.data.balance.available.toLocaleString()} د.ج\nآخر تحديث: ${new Date(data.data.lastUpdated).toLocaleString('ar-DZ')}`,
+          text: `رصيد حسابك الجاري\n\n${data.data.balance.available.toLocaleString('ar-DZ')} دينار جزائري\n\nآخر تحديث: ${new Date(data.data.lastUpdated).toLocaleString('ar-DZ', {
+            year: 'numeric',
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })}`,
           sender: 'bot',
           timestamp: new Date(),
-          data: data.data
+          data: data.data,
+          type: 'balance'
         };
         setMessages(prev => [...prev, balanceMessage]);
 
-        // Show equivalent amounts
         if (data.data.equivalentAmounts) {
-          const equivalentMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            text: `المبلغ المعادل:\n💵 ${data.data.equivalentAmounts.USD} USD\n💶 ${data.data.equivalentAmounts.EUR} EUR\n💷 ${data.data.equivalentAmounts.GBP} GBP`,
-            sender: 'bot',
-            timestamp: new Date(),
-            data: data.data.equivalentAmounts
-          };
-          setMessages(prev => [...prev, equivalentMessage]);
+          setTimeout(() => {
+            const equivalentMessage: Message = {
+              id: (Date.now() + 1).toString(),
+              text: `المبلغ بالعملات الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمريكي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
+              sender: 'bot',
+              timestamp: new Date(),
+              data: data.data.equivalentAmounts,
+              type: 'rates'
+            };
+            setMessages(prev => [...prev, equivalentMessage]);
+          }, 800);
         }
       }
     } catch (error) {
       console.error('Balance fetch error:', error);
-      addErrorMessage("عذراً، لا يمكن الوصول لرصيد الحساب حالياً.");
+      addErrorMessage("نعتذر، لا يمكن الوصول لرصيد الحساب في الوقت الحالي. يرجى المحاولة لاحقاً.");
     }
   };
 
-  // Show current market rates
+  // Enhanced market rates display
   const showCurrentMarketRates = async () => {
     if (realTimeData.marketData) {
       const rates = realTimeData.marketData.market.dzdRates;
-      const ratesText = `أسعار الصرف الحالية (د.ج):\n` +
-        `💵 الدولار الأمريكي: ${rates.USD}\n` +
-        `💶 اليورو: ${rates.EUR}\n` +
-        `💷 الجنيه الإسترليني: ${rates.GBP}\n` +
-        `🇸🇦 الريال السعودي: ${rates.SAR}\n` +
-        `آخر تحديث: ${new Date(realTimeData.marketData.market.timestamp).toLocaleString('ar-DZ')}`;
+      const timestamp = new Date(realTimeData.marketData.market.timestamp);
       
       const ratesMessage: Message = {
         id: Date.now().toString(),
-        text: ratesText,
+        text: `أسعار صرف العملات\n\n• الدولار الأمريكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• الجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
+          hour: '2-digit',
+          minute: '2-digit',
+          day: 'numeric',
+          month: 'long'
+        })}`,
         sender: 'bot',
         timestamp: new Date(),
-        data: rates
+        data: rates,
+        type: 'rates'
       };
       setMessages(prev => [...prev, ratesMessage]);
     }
   };
 
-  // Fetch transaction history
+  // Enhanced transaction history
   const fetchTransactionHistory = async () => {
     try {
       const response = await fetch('/api/realtime/transactions/0001234567890123?limit=5', {
-        headers: {
-          'user-id': 'user_123'
-        }
+        headers: { 'user-id': 'user_123' }
       });
       
       if (response.ok) {
         const data = await response.json();
-        const transactions = data.data.transactions.slice(0, 3);
+        const transactions = data.data.transactions.slice(0, 4);
         
-        let historyText = "آخر 3 عمليات:\n";
+        let historyText = "آخر العمليات المصرفية\n\n";
         transactions.forEach((txn: any, index: number) => {
-          const type = txn.transactionType === 'CREDIT' ? '⬆️ إيداع' : '⬇️ سحب';
-          const amount = txn.amount.value.toLocaleString();
-          const date = new Date(txn.valueDate).toLocaleDateString('ar-DZ');
-          historyText += `\n${index + 1}. ${type}: ${amount} د.ج - ${date}\n   ${txn.description}`;
+          const type = txn.transactionType === 'CREDIT' ? 'إيداع' : 'سحب';
+          const amount = txn.amount.value.toLocaleString('ar-DZ');
+          const date = new Date(txn.valueDate).toLocaleDateString('ar-DZ', {
+            month: 'short',
+            day: 'numeric'
+          });
+          historyText += `• ${type} ${amount} د.ج - ${date}\n  ${txn.description}\n\n`;
         });
         
         const historyMessage: Message = {
           id: Date.now().toString(),
-          text: historyText,
+          text: historyText.trim(),
           sender: 'bot',
           timestamp: new Date(),
-          data: transactions
+          data: transactions,
+          type: 'transactions'
         };
         setMessages(prev => [...prev, historyMessage]);
       }
     } catch (error) {
       console.error('Transaction history error:', error);
-      addErrorMessage("عذراً، لا يمكن الوصول لتاريخ العمليات حالياً.");
+      addErrorMessage("نعتذر، لا يمكن الوصول لتاريخ العمليات حالياً. يرجى المحاو��ة لاحقاً.");
     }
   };
 
-  // Show system status
+  // Enhanced system status
   const showSystemStatus = async () => {
     try {
       const response = await fetch('/api/realtime/system-status');
       if (response.ok) {
         const data = await response.json();
-        const statusText = `حالة النظام:\n` +
-          `🟢 النظام: ${data.data.systemHealth}\n` +
-          `⏰ معدل التشغيل: ${data.data.uptime}%\n` +
-          `📊 إجمالي العمليات: ${data.data.totalTransactions.toLocaleString()}\n` +
-          `🛡️ معدل اكتشاف الاحتيال: ${data.data.fraudDetectionRate}%\n` +
-          `🏦 البنوك المتصلة: ${data.data.bankConnectivity.filter((b: any) => b.status === 'ONLINE').length}/8`;
+        const onlineBanks = data.data.bankConnectivity.filter((b: any) => b.status === 'ONLINE').length;
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: statusText,
+          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
-          data: data.data
+          data: data.data,
+          type: 'status'
         };
         setMessages(prev => [...prev, statusMessage]);
       }
     } catch (error) {
-      addErrorMessage("عذراً، لا يمكن الوصول لحالة النظام حالياً.");
+      addErrorMessage("نعتذر، لا يمكن الوصول لحالة النظام حالياً.");
     }
   };
 
-  // Add system message
+  // Helper functions
   const addSystemMessage = (text: string, type: string) => {
     const systemMessage: Message = {
       id: Date.now().toString(),
       text,
-      sender: 'bot',
+      sender: 'system',
       timestamp: new Date(),
-      intent: type
+      intent: type,
+      type: 'text'
     };
     setMessages(prev => [...prev, systemMessage]);
   };
 
-  // Add error message
   const addErrorMessage = (text: string) => {
     const errorMessage: Message = {
       id: Date.now().toString(),
       text,
       sender: 'bot',
       timestamp: new Date(),
-      intent: 'error'
+      intent: 'error',
+      type: 'error'
     };
     setMessages(prev => [...prev, errorMessage]);
   };
 
-  // Auto-detect language
   const detectLanguage = (text: string): 'ar' | 'fr' | 'dz' => {
     const arabicPattern = /[\u0600-\u06FF]/;
     const frenchPattern = /[àâäçéèêëïîôùûüÿ]/i;
@@ -401,12 +425,11 @@ export default function ChatBot() {
     return selectedLanguage;
   };
 
-  // Voice recognition
   const toggleVoiceRecognition = () => {
     if (!isListening) {
       setIsListening(true);
       setTimeout(() => {
-        setInputText("مرحبا، أريد معرفة رصيد حسابي");
+        setInputText("أريد معرفة رصيد حسابي");
         setIsListening(false);
       }, 3000);
     } else {
@@ -414,7 +437,6 @@ export default function ChatBot() {
     }
   };
 
-  // Text-to-speech
   const speakText = (text: string) => {
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -423,41 +445,68 @@ export default function ChatBot() {
     }
   };
 
-  // Auto-scroll
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Initialize with professional welcome message
+  // Professional welcome message
   useEffect(() => {
     const welcomeMessage: Message = {
       id: '0',
       text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       sender: 'bot',
-      timestamp: new Date()
+      timestamp: new Date(),
+      type: 'text'
     };
     setMessages([welcomeMessage]);
   }, []);
 
+  const getMessageStyle = (message: Message) => {
+    if (message.sender === 'user') {
+      return 'bg-primary text-primary-foreground';
+    }
+    
+    switch (message.type) {
+      case 'error':
+        return 'bg-red-50 text-red-800 border border-red-200';
+      case 'success':
+        return 'bg-green-50 text-green-800 border border-green-200';
+      case 'balance':
+        return 'bg-blue-50 text-blue-900 border border-blue-200';
+      case 'rates':
+        return 'bg-amber-50 text-amber-900 border border-amber-200';
+      case 'transactions':
+        return 'bg-purple-50 text-purple-900 border border-purple-200';
+      case 'status':
+        return 'bg-emerald-50 text-emerald-900 border border-emerald-200';
+      default:
+        return 'bg-muted text-muted-foreground';
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
       <div className="max-w-4xl mx-auto">
-        {/* Enhanced Header with Real-time Status */}
-        <Card className="mb-4">
-          <CardHeader>
+        {/* Enhanced Header */}
+        <Card className="mb-4 shadow-lg border-0">
+          <CardHeader className="bg-gradient-to-r from-primary to-blue-600 text-white rounded-t-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="h-10 w-10 bg-primary rounded-full flex items-center justify-center">
-                  <Bot className="h-6 w-6 text-primary-foreground" />
+                <div className="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                  <Bot className="h-7 w-7 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl">BankGenie AI Assistant</CardTitle>
+                  <CardTitle className="text-xl text-white">بنك جيني الذكي</CardTitle>
                   <div className="flex items-center space-x-2">
-                    <p className="text-muted-foreground">مساعد بنكي ذكي • Assistant bancaire intelligent</p>
+                    <p className="text-white/90 text-sm">مساعدك المصرفي الذكي</p>
                     {realTimeData.systemStatus && (
-                      <Badge variant="default" className="text-xs">
+                      <Badge variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
                         <Zap className="h-3 w-3 mr-1" />
-                        Live Data
+                        متصل مباشرة
                       </Badge>
                     )}
                   </div>
@@ -465,14 +514,14 @@ export default function ChatBot() {
               </div>
               
               <div className="flex items-center space-x-2">
-                <Languages className="h-4 w-4 text-muted-foreground" />
+                <Languages className="h-4 w-4 text-white/80" />
                 <select 
                   value={selectedLanguage} 
                   onChange={(e) => setSelectedLanguage(e.target.value as any)}
-                  className="bg-background border border-border rounded-md px-2 py-1"
+                  className="bg-white/20 border border-white/30 rounded-md px-2 py-1 text-white text-sm backdrop-blur-sm"
                 >
                   {Object.entries(languages).map(([code, lang]) => (
-                    <option key={code} value={code}>
+                    <option key={code} value={code} className="text-gray-900">
                       {lang.flag} {lang.name}
                     </option>
                   ))}
@@ -480,23 +529,27 @@ export default function ChatBot() {
               </div>
             </div>
             
-            {/* Real-time Status Bar */}
+            {/* Enhanced Status Bar */}
             {realTimeData.marketData && (
-              <div className="mt-4 p-3 bg-muted/50 rounded-lg">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center space-x-4">
+              <div className="mt-4 p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                <div className="flex items-center justify-between text-sm text-white">
+                  <div className="flex items-center space-x-6">
                     <span className="flex items-center">
-                      <TrendingUp className="h-4 w-4 mr-1 text-green-500" />
-                      USD: {realTimeData.marketData.market.dzdRates.USD} DZD
+                      <TrendingUp className="h-4 w-4 mr-1" />
+                      USD: {realTimeData.marketData.market.dzdRates.USD}
                     </span>
                     <span className="flex items-center">
-                      <TrendingUp className="h-4 w-4 mr-1 text-blue-500" />
-                      EUR: {realTimeData.marketData.market.dzdRates.EUR} DZD
+                      <TrendingUp className="h-4 w-4 mr-1" />
+                      EUR: {realTimeData.marketData.market.dzdRates.EUR}
+                    </span>
+                    <span className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {new Date().toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="text-muted-foreground">Live Updates</span>
-                    <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-white/90">بيانات حية</span>
+                    <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
                   </div>
                 </div>
               </div>
@@ -504,8 +557,8 @@ export default function ChatBot() {
           </CardHeader>
         </Card>
 
-        {/* Chat Interface */}
-        <Card className="h-[600px] flex flex-col">
+        {/* Enhanced Chat Interface */}
+        <Card className="h-[600px] flex flex-col shadow-lg border-0">
           <CardContent className="flex-1 p-0">
             <ScrollArea className="h-full p-4">
               <div className="space-y-4">
@@ -514,49 +567,58 @@ export default function ChatBot() {
                     key={message.id}
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`max-w-[80%] flex items-start space-x-2 ${
+                    <div className={`max-w-[85%] flex items-start space-x-3 ${
                       message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''
                     }`}>
-                      <div className={`h-8 w-8 rounded-full flex items-center justify-center ${
+                      <div className={`h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         message.sender === 'user' 
                           ? 'bg-primary text-primary-foreground' 
-                          : 'bg-accent text-accent-foreground'
+                          : message.sender === 'system'
+                          ? 'bg-yellow-500 text-white'
+                          : 'bg-white border-2 border-primary/20 text-primary'
                       }`}>
                         {message.sender === 'user' ? 
                           <User className="h-4 w-4" /> : 
+                          message.sender === 'system' ?
+                          <Shield className="h-4 w-4" /> :
                           <Bot className="h-4 w-4" />
                         }
                       </div>
-                      <div>
-                        <div className={`rounded-lg px-4 py-2 ${
-                          message.sender === 'user'
-                            ? 'bg-primary text-primary-foreground'
-                            : message.intent === 'error'
-                            ? 'bg-red-100 text-red-800 border border-red-200'
-                            : message.intent === 'security_alert'
-                            ? 'bg-yellow-100 text-yellow-800 border border-yellow-200'
-                            : 'bg-muted text-muted-foreground'
-                        }`}>
-                          <p className="text-sm whitespace-pre-line">{message.text}</p>
+                      <div className="flex-1">
+                        <div className={`rounded-2xl px-4 py-3 shadow-sm ${getMessageStyle(message)}`}>
+                          <p className="text-sm whitespace-pre-line leading-relaxed">{message.text}</p>
                         </div>
-                        <div className="flex items-center mt-1 space-x-2">
+                        <div className="flex items-center mt-2 space-x-3">
                           <span className="text-xs text-muted-foreground">
-                            {message.timestamp.toLocaleTimeString()}
+                            {message.timestamp.toLocaleTimeString('ar-DZ', { 
+                              hour: '2-digit', 
+                              minute: '2-digit' 
+                            })}
                           </span>
                           {message.intent && message.confidence && (
                             <Badge variant="outline" className="text-xs">
-                              {message.intent} ({Math.round(message.confidence * 100)}%)
+                              دقة {Math.round(message.confidence * 100)}%
                             </Badge>
                           )}
                           {message.sender === 'bot' && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => speakText(message.text)}
-                              className="h-6 w-6 p-0"
-                            >
-                              <Volume2 className="h-3 w-3" />
-                            </Button>
+                            <div className="flex items-center space-x-1">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => speakText(message.text)}
+                                className="h-6 w-6 p-0 hover:bg-primary/10"
+                              >
+                                <Volume2 className="h-3 w-3" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => copyToClipboard(message.text)}
+                                className="h-6 w-6 p-0 hover:bg-primary/10"
+                              >
+                                <Copy className="h-3 w-3" />
+                              </Button>
+                            </div>
                           )}
                         </div>
                       </div>
@@ -566,15 +628,14 @@ export default function ChatBot() {
                 
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="flex items-start space-x-2">
-                      <div className="h-8 w-8 bg-accent rounded-full flex items-center justify-center">
-                        <Bot className="h-4 w-4 text-accent-foreground" />
+                    <div className="flex items-start space-x-3">
+                      <div className="h-8 w-8 bg-white border-2 border-primary/20 rounded-full flex items-center justify-center">
+                        <Bot className="h-4 w-4 text-primary" />
                       </div>
-                      <div className="bg-muted rounded-lg px-4 py-2">
-                        <div className="flex space-x-1">
-                          <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
-                          <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                          <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      <div className="bg-muted rounded-2xl px-4 py-3 shadow-sm">
+                        <div className="flex items-center space-x-2">
+                          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                          <span className="text-sm text-muted-foreground">جاري الكتابة...</span>
                         </div>
                       </div>
                     </div>
@@ -587,15 +648,15 @@ export default function ChatBot() {
           </CardContent>
           
           {/* Enhanced Input Area */}
-          <div className="border-t border-border p-4">
+          <div className="border-t border-border p-4 bg-gradient-to-r from-slate-50 to-blue-50">
             <div className="flex items-center space-x-2">
               <div className="flex-1 relative">
                 <Input
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  placeholder="اكتب رسالتك هنا... / Tapez votre message..."
+                  placeholder="اكتب استفسارك هنا..."
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  className="pr-12"
+                  className="pr-12 bg-white border-primary/20 focus:border-primary rounded-xl h-12"
                 />
                 <Button
                   variant="ghost"
@@ -608,78 +669,107 @@ export default function ChatBot() {
                   {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
                 </Button>
               </div>
-              <Button onClick={handleSendMessage} disabled={!inputText.trim() || isTyping}>
+              <Button 
+                onClick={handleSendMessage} 
+                disabled={!inputText.trim() || isTyping}
+                className="h-12 px-6 rounded-xl"
+              >
                 <Send className="h-4 w-4" />
               </Button>
             </div>
             
-            {/* Enhanced Quick Actions with Real-time Features */}
+            {/* Professional Quick Actions */}
             <div className="flex flex-wrap gap-2 mt-3">
-              <Button variant="outline" size="sm" onClick={() => setInputText("رصيد حسابي الفوري")}>
+              <Button variant="outline" size="sm" onClick={() => setInputText("رصيد حسابي")} className="rounded-full">
                 <CreditCard className="h-3 w-3 mr-1" />
-                رصيد فوري
+                رصيد الحساب
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("أسعار الصرف الحالية")}>
+              <Button variant="outline" size="sm" onClick={() => setInputText("أسعار الصرف")} className="rounded-full">
                 <TrendingUp className="h-3 w-3 mr-1" />
                 أسعار الصرف
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("آخر 5 عمليات")}>
+              <Button variant="outline" size="sm" onClick={() => setInputText("آخر العمليات")} className="rounded-full">
                 <FileText className="h-3 w-3 mr-1" />
-                العمليات الأخيرة
+                العمليات
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("حالة النظام البنكي")}>
+              <Button variant="outline" size="sm" onClick={() => setInputText("حالة النظام")} className="rounded-full">
                 <Shield className="h-3 w-3 mr-1" />
                 حالة النظام
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("أقرب فرع")}>
+              <Button variant="outline" size="sm" onClick={() => setInputText("أقرب فرع")} className="rounded-full">
                 <MapPin className="h-3 w-3 mr-1" />
-                مواقع الفروع
+                الفروع
               </Button>
             </div>
           </div>
         </Card>
 
-        {/* Enhanced Auth Status with Real-time Features */}
-        {!isAuthenticated ? (
-          <Card className="mt-4 border-yellow-200 bg-yellow-50">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2">
-                <AlertCircle className="h-4 w-4 text-yellow-600" />
-                <span className="text-yellow-800">
-                  سجل دخولك للوصول إلى البيانات الحية والخدمات المصرفية الكاملة • Connectez-vous pour accéder aux données en temps réel
-                </span>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => setIsAuthenticated(true)}
-                >
-                  تسجيل الدخول
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="mt-4 border-green-200 bg-green-50">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Shield className="h-4 w-4 text-green-600" />
-                  <span className="text-green-800">
-                    متصل بالنظام المصرفي الحي • Connecté au système bancaire en temps réel
-                  </span>
+        {/* Enhanced Status Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          {!isAuthenticated ? (
+            <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <AlertCircle className="h-5 w-5 text-amber-600" />
+                    <div>
+                      <p className="text-amber-800 font-medium">تسجيل الدخول مطلوب</p>
+                      <p className="text-amber-700 text-sm">للوصول لجميع خدماتك المصرفية</p>
+                    </div>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setIsAuthenticated(true)}
+                    className="border-amber-300 text-amber-700 hover:bg-amber-100"
+                  >
+                    دخول
+                  </Button>
                 </div>
-                <div className="flex items-center space-x-2">
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="border-green-200 bg-gradient-to-r from-green-50 to-emerald-50">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Shield className="h-5 w-5 text-green-600" />
+                    <div>
+                      <p className="text-green-800 font-medium">متصل بأمان</p>
+                      <p className="text-green-700 text-sm">جميع خدماتك المصرفية متاحة</p>
+                    </div>
+                  </div>
                   {realTimeData.systemStatus === 'HEALTHY' && (
-                    <Badge variant="default" className="bg-green-100 text-green-800">
+                    <Badge variant="default" className="bg-green-100 text-green-800 border-green-200">
                       <Zap className="h-3 w-3 mr-1" />
-                      Live Data Active
+                      متصل مباشرة
                     </Badge>
                   )}
                 </div>
+              </CardContent>
+            </Card>
+          )}
+
+          <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <PhoneCall className="h-5 w-5 text-blue-600" />
+                  <div>
+                    <p className="text-blue-800 font-medium">تحتا�� مساعدة إضافية؟</p>
+                    <p className="text-blue-700 text-sm">خدمة العملاء 24/7</p>
+                  </div>
+                </div>
+                <div className="flex space-x-2">
+                  <Button variant="outline" size="sm" className="border-blue-300 text-blue-700 hover:bg-blue-100">
+                    <MessageCircle className="h-3 w-3 mr-1" />
+                    دردشة
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
-        )}
+        </div>
       </div>
     </div>
   );
