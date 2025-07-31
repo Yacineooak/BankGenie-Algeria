@@ -30,6 +30,7 @@ const App = () => (
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/loan-simulator" element={<LoanSimulator />} />
           <Route path="/kyc" element={<KYC />} />
+          <Route path="/fraud-monitoring" element={<FraudMonitoring />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
