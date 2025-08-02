@@ -2,7 +2,15 @@
   "name": "bankgenie",
   "version": "2.0.0",
   "description": "Enterprise banking platform for modern financial institutions with real-time processing, advanced security, and multilingual support.",
-  "keywords": ["banking", "fintech", "algeria", "multilingual", "security", "real-time", "enterprise"],
+  "keywords": [
+    "banking",
+    "fintech",
+    "algeria",
+    "multilingual",
+    "security",
+    "real-time",
+    "enterprise"
+  ],
   "author": "BankGenie Development Team",
   "license": "MIT",
   "homepage": "https://bankgenie.dz",

@@ -54,6 +54,7 @@ Before contributing, ensure you have:
 ### Development Environment Setup
 
 1. **Fork the Repository**
+
    ```bash
    # Fork the repository on GitHub
    # Then clone your fork
@@ -62,35 +63,40 @@ Before contributing, ensure you have:
    ```
 
 2. **Add Upstream Remote**
+
    ```bash
    git remote add upstream https://github.com/original-repo/bankgenie.git
    git remote -v
    ```
 
 3. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 4. **Environment Configuration**
+
    ```bash
    cp .env.example .env.development
    # Edit .env.development with your local settings
    ```
 
 5. **Database Setup**
+
    ```bash
    # Create development database
    createdb bankgenie_dev
-   
+
    # Run migrations
    npm run db:migrate:dev
-   
+
    # Seed test data
    npm run db:seed:dev
    ```
 
 6. **Start Development Server**
+
    ```bash
    npm run dev
    ```
@@ -141,6 +147,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 **Types:**
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation only changes
@@ -151,6 +158,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 - `chore`: Changes to the build process or auxiliary tools
 
 **Examples:**
+
 ```bash
 feat(auth): add two-factor authentication support
 
@@ -164,37 +172,42 @@ refactor(database): optimize user query performance
 ### Working on a Feature
 
 1. **Create a Feature Branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
 2. **Keep Your Branch Updated**
+
    ```bash
    git fetch upstream
    git rebase upstream/main
    ```
 
 3. **Make Your Changes**
+
    - Write clean, readable code
    - Follow the coding standards
    - Add tests for new functionality
    - Update documentation if needed
 
 4. **Test Your Changes**
+
    ```bash
    # Run all tests
    npm test
-   
+
    # Run specific test suite
    npm run test:unit
    npm run test:integration
    npm run test:e2e
-   
+
    # Check code coverage
    npm run test:coverage
    ```
 
 5. **Commit Your Changes**
+
    ```bash
    git add .
    git commit -m "feat(auth): add OAuth2 integration"
@@ -233,9 +246,9 @@ interface UserAccount {
 }
 
 const calculateInterest = async (
-  principal: number, 
-  rate: number, 
-  time: number
+  principal: number,
+  rate: number,
+  time: number,
 ): Promise<number> => {
   const interest = principal * rate * time;
   return parseFloat(interest.toFixed(2));
@@ -245,11 +258,11 @@ const calculateInterest = async (
 var user_account = {
   id: "",
   email: "",
-  balance: 0
-}
+  balance: 0,
+};
 
 function calculateInterest(principal, rate, time) {
-  return principal * rate * time
+  return principal * rate * time;
 }
 ```
 
@@ -259,18 +272,18 @@ function calculateInterest(principal, rate, time) {
 
 ```tsx
 // ✅ Good component structure
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { UserAccount } from '@/types/user';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { UserAccount } from "@/types/user";
 
 interface AccountBalanceProps {
   userId: string;
   onBalanceUpdate?: (balance: number) => void;
 }
 
-export default function AccountBalance({ 
-  userId, 
-  onBalanceUpdate 
+export default function AccountBalance({
+  userId,
+  onBalanceUpdate,
 }: AccountBalanceProps) {
   const [balance, setBalance] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -287,7 +300,7 @@ export default function AccountBalance({
       setBalance(data.balance);
       onBalanceUpdate?.(data.balance);
     } catch (error) {
-      console.error('Failed to fetch balance:', error);
+      console.error("Failed to fetch balance:", error);
     } finally {
       setIsLoading(false);
     }
@@ -299,9 +312,7 @@ export default function AccountBalance({
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div className="balance-amount">
-          {balance.toLocaleString()} DZD
-        </div>
+        <div className="balance-amount">{balance.toLocaleString()} DZD</div>
       )}
       <Button onClick={fetchBalance} disabled={isLoading}>
         Refresh Balance
@@ -426,29 +437,30 @@ We use **Vitest** for unit and integration tests, and **Playwright** for end-to-
 
 ```typescript
 // tests/utils/calculateInterest.test.ts
-import { describe, it, expect } from 'vitest';
-import { calculateInterest } from '@/utils/financial';
+import { describe, it, expect } from "vitest";
+import { calculateInterest } from "@/utils/financial";
 
-describe('calculateInterest', () => {
-  it('should calculate simple interest correctly', () => {
+describe("calculateInterest", () => {
+  it("should calculate simple interest correctly", () => {
     const principal = 10000;
     const rate = 0.05; // 5%
     const time = 2; // 2 years
-    
+
     const result = calculateInterest(principal, rate, time);
-    
+
     expect(result).toBe(1000);
   });
 
-  it('should handle zero values gracefully', () => {
+  it("should handle zero values gracefully", () => {
     expect(calculateInterest(0, 0.05, 1)).toBe(0);
     expect(calculateInterest(1000, 0, 1)).toBe(0);
     expect(calculateInterest(1000, 0.05, 0)).toBe(0);
   });
 
-  it('should throw error for negative values', () => {
-    expect(() => calculateInterest(-1000, 0.05, 1))
-      .toThrow('Principal amount cannot be negative');
+  it("should throw error for negative values", () => {
+    expect(() => calculateInterest(-1000, 0.05, 1)).toThrow(
+      "Principal amount cannot be negative",
+    );
   });
 });
 ```
@@ -457,12 +469,12 @@ describe('calculateInterest', () => {
 
 ```typescript
 // tests/api/users.test.ts
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import request from 'supertest';
-import { app } from '@/server';
-import { cleanupDatabase, createTestUser } from '@/tests/helpers';
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import request from "supertest";
+import { app } from "@/server";
+import { cleanupDatabase, createTestUser } from "@/tests/helpers";
 
-describe('User API', () => {
+describe("User API", () => {
   beforeEach(async () => {
     await cleanupDatabase();
   });
@@ -471,31 +483,31 @@ describe('User API', () => {
     await cleanupDatabase();
   });
 
-  describe('GET /api/v1/users/:id', () => {
-    it('should return user details for valid ID', async () => {
+  describe("GET /api/v1/users/:id", () => {
+    it("should return user details for valid ID", async () => {
       const testUser = await createTestUser({
-        email: 'test@example.com',
-        name: 'Test User'
+        email: "test@example.com",
+        name: "Test User",
       });
 
       const response = await request(app)
         .get(`/api/v1/users/${testUser.id}`)
-        .set('Authorization', `Bearer ${testUser.token}`)
+        .set("Authorization", `Bearer ${testUser.token}`)
         .expect(200);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.data.email).toBe('test@example.com');
-      expect(response.body.data.name).toBe('Test User');
+      expect(response.body.data.email).toBe("test@example.com");
+      expect(response.body.data.name).toBe("Test User");
     });
 
-    it('should return 404 for non-existent user', async () => {
+    it("should return 404 for non-existent user", async () => {
       const response = await request(app)
-        .get('/api/v1/users/non-existent-id')
-        .set('Authorization', 'Bearer valid-token')
+        .get("/api/v1/users/non-existent-id")
+        .set("Authorization", "Bearer valid-token")
         .expect(404);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error.code).toBe('USER_NOT_FOUND');
+      expect(response.body.error.code).toBe("USER_NOT_FOUND");
     });
   });
 });
@@ -505,30 +517,32 @@ describe('User API', () => {
 
 ```typescript
 // tests/e2e/login.spec.ts
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('User Login', () => {
-  test('should login with valid credentials', async ({ page }) => {
-    await page.goto('/login');
+test.describe("User Login", () => {
+  test("should login with valid credentials", async ({ page }) => {
+    await page.goto("/login");
 
-    await page.fill('[data-testid=email-input]', 'test@example.com');
-    await page.fill('[data-testid=password-input]', 'password123');
-    await page.click('[data-testid=login-button]');
+    await page.fill("[data-testid=email-input]", "test@example.com");
+    await page.fill("[data-testid=password-input]", "password123");
+    await page.click("[data-testid=login-button]");
 
-    await expect(page).toHaveURL('/dashboard');
-    await expect(page.locator('[data-testid=welcome-message]'))
-      .toContainText('Welcome back');
+    await expect(page).toHaveURL("/dashboard");
+    await expect(page.locator("[data-testid=welcome-message]")).toContainText(
+      "Welcome back",
+    );
   });
 
-  test('should show error for invalid credentials', async ({ page }) => {
-    await page.goto('/login');
+  test("should show error for invalid credentials", async ({ page }) => {
+    await page.goto("/login");
 
-    await page.fill('[data-testid=email-input]', 'invalid@example.com');
-    await page.fill('[data-testid=password-input]', 'wrongpassword');
-    await page.click('[data-testid=login-button]');
+    await page.fill("[data-testid=email-input]", "invalid@example.com");
+    await page.fill("[data-testid=password-input]", "wrongpassword");
+    await page.click("[data-testid=login-button]");
 
-    await expect(page.locator('[data-testid=error-message]'))
-      .toContainText('Invalid email or password');
+    await expect(page.locator("[data-testid=error-message]")).toContainText(
+      "Invalid email or password",
+    );
   });
 });
 ```
@@ -565,6 +579,7 @@ npm test -- --run calculateInterest
 ### Before Submitting
 
 1. **Ensure Tests Pass**
+
    ```bash
    npm test
    npm run lint
@@ -572,6 +587,7 @@ npm test -- --run calculateInterest
    ```
 
 2. **Update Documentation**
+
    - Update README.md if needed
    - Add API documentation for new endpoints
    - Update CHANGELOG.md
@@ -588,9 +604,11 @@ When creating a pull request, use this template:
 
 ```markdown
 ## Description
+
 Brief description of the changes made.
 
 ## Type of Change
+
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
@@ -599,15 +617,18 @@ Brief description of the changes made.
 - [ ] Code refactoring
 
 ## How Has This Been Tested?
+
 - [ ] Unit tests
 - [ ] Integration tests
 - [ ] E2E tests
 - [ ] Manual testing
 
 ## Screenshots (if applicable)
+
 Add screenshots here.
 
 ## Checklist
+
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
@@ -638,12 +659,14 @@ Add screenshots here.
 When reporting bugs, include:
 
 1. **Environment Information**
+
    - Operating System
    - Node.js version
    - Browser (if applicable)
    - BankGenie version
 
 2. **Steps to Reproduce**
+
    ```markdown
    1. Go to '...'
    2. Click on '....'
@@ -686,6 +709,7 @@ When requesting features, include:
 Instead, email us directly at: security@bankgenie.com
 
 Include:
+
 - Description of the vulnerability
 - Steps to reproduce
 - Potential impact

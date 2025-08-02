@@ -20,12 +20,14 @@ This guide provides comprehensive instructions for deploying BankGenie in variou
 ### System Requirements
 
 #### Minimum Requirements
+
 - **CPU**: 2 cores
 - **RAM**: 4GB
 - **Storage**: 20GB SSD
 - **Network**: 100Mbps
 
 #### Recommended Requirements
+
 - **CPU**: 4+ cores
 - **RAM**: 8GB+
 - **Storage**: 50GB+ SSD
@@ -270,15 +272,15 @@ module.exports = {
     time: true,
     max_memory_restart: '1G',
     node_args: '--max-old-space-size=1024',
-    
+
     // Monitoring
     monitoring: true,
     pmx: true,
-    
+
     // Auto restart
     watch: false,
     ignore_watch: ['node_modules', 'logs'],
-    
+
     // Graceful shutdown
     kill_timeout: 5000,
     wait_ready: true,
@@ -317,7 +319,7 @@ upstream bankgenie_backend {
 server {
     listen 80;
     server_name bankgenie.dz www.bankgenie.dz;
-    
+
     # Redirect HTTP to HTTPS
     return 301 https://$server_name$request_uri;
 }
@@ -325,29 +327,29 @@ server {
 server {
     listen 443 ssl http2;
     server_name bankgenie.dz www.bankgenie.dz;
-    
+
     # SSL Configuration
     ssl_certificate /opt/bankgenie/ssl/fullchain.pem;
     ssl_certificate_key /opt/bankgenie/ssl/privkey.pem;
     ssl_session_cache shared:SSL:50m;
     ssl_session_timeout 1d;
     ssl_session_tickets off;
-    
+
     # Modern SSL configuration
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
     ssl_prefer_server_ciphers off;
-    
+
     # HSTS
     add_header Strict-Transport-Security "max-age=63072000" always;
-    
+
     # Security headers
     add_header X-Frame-Options DENY always;
     add_header X-Content-Type-Options nosniff always;
     add_header X-XSS-Protection "1; mode=block" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' wss:; frame-ancestors 'none';" always;
-    
+
     # Gzip compression
     gzip on;
     gzip_vary on;
@@ -355,20 +357,20 @@ server {
     gzip_proxied any;
     gzip_comp_level 6;
     gzip_types text/plain text/css text/xml text/javascript application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
-    
+
     # File upload limits
     client_max_body_size 10M;
     client_body_timeout 60;
     client_header_timeout 60;
-    
+
     # Logging
     access_log /opt/bankgenie/logs/nginx_access.log;
     error_log /opt/bankgenie/logs/nginx_error.log;
-    
+
     # API routes with rate limiting
     location /api/ {
         limit_req zone=bankgenie_api burst=20 nodelay;
-        
+
         proxy_pass http://bankgenie_backend;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -382,11 +384,11 @@ server {
         proxy_send_timeout 30;
         proxy_read_timeout 30;
     }
-    
+
     # Auth routes with stricter rate limiting
     location /api/auth/ {
         limit_req zone=bankgenie_auth burst=5 nodelay;
-        
+
         proxy_pass http://bankgenie_backend;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
@@ -394,7 +396,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
-    
+
     # WebSocket support
     location /ws {
         proxy_pass http://bankgenie_backend;
@@ -406,7 +408,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
-    
+
     # Static files with caching
     location /assets/ {
         alias /opt/bankgenie/app/dist/spa/assets/;
@@ -414,7 +416,7 @@ server {
         add_header Cache-Control "public, immutable";
         access_log off;
     }
-    
+
     # Main application
     location / {
         proxy_pass http://bankgenie_backend;
@@ -424,11 +426,11 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_cache_bypass $http_upgrade;
-        
+
         # Handle SPA routing
         try_files $uri $uri/ @fallback;
     }
-    
+
     location @fallback {
         proxy_pass http://bankgenie_backend;
         proxy_http_version 1.1;
@@ -437,7 +439,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
-    
+
     # Health check
     location /health {
         access_log off;
@@ -445,14 +447,14 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Host $host;
     }
-    
+
     # Deny access to sensitive files
     location ~ /\. {
         deny all;
         access_log off;
         log_not_found off;
     }
-    
+
     location ~ \.(env|config|log)$ {
         deny all;
         access_log off;
@@ -543,7 +545,7 @@ CMD ["node", "dist/server/node-build.mjs"]
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
+version: "3.8"
 
 services:
   bankgenie:
@@ -744,22 +746,22 @@ doctl databases create bankgenie-db \
 ```yaml
 # cloudbuild.yaml
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/bankgenie', '.']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/bankgenie']
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/bankgenie", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/bankgenie"]
+  - name: "gcr.io/cloud-builders/gcloud"
     args:
-      - 'run'
-      - 'deploy'
-      - 'bankgenie'
-      - '--image'
-      - 'gcr.io/$PROJECT_ID/bankgenie'
-      - '--region'
-      - 'europe-west1'
-      - '--platform'
-      - 'managed'
-      - '--allow-unauthenticated'
+      - "run"
+      - "deploy"
+      - "bankgenie"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/bankgenie"
+      - "--region"
+      - "europe-west1"
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"
 ```
 
 ## 🔒 Security Hardening
@@ -914,6 +916,7 @@ pm2 restart bankgenie
 ### Common Issues
 
 #### Application Won't Start
+
 ```bash
 # Check logs
 pm2 logs bankgenie
@@ -932,6 +935,7 @@ free -h
 ```
 
 #### Database Connection Issues
+
 ```bash
 # Test database connection
 psql -h localhost -U bankgenie_user -d bankgenie_prod -c "SELECT 1;"
@@ -944,6 +948,7 @@ sudo tail -f /var/log/postgresql/postgresql-14-main.log
 ```
 
 #### High CPU/Memory Usage
+
 ```bash
 # Monitor processes
 htop
@@ -956,6 +961,7 @@ node --inspect dist/server/node-build.mjs
 ```
 
 #### SSL Certificate Issues
+
 ```bash
 # Check certificate validity
 openssl x509 -in /opt/bankgenie/ssl/fullchain.pem -text -noout
@@ -970,6 +976,7 @@ sudo certbot renew --force-renewal
 ### Performance Optimization
 
 #### Database Optimization
+
 ```sql
 -- Add indexes for common queries
 CREATE INDEX CONCURRENTLY idx_users_email ON users(email);
@@ -981,6 +988,7 @@ EXPLAIN ANALYZE SELECT * FROM transactions WHERE user_id = 123;
 ```
 
 #### Application Optimization
+
 ```bash
 # Enable Node.js performance profiling
 node --prof dist/server/node-build.mjs
@@ -992,6 +1000,7 @@ node --prof-process isolate-*.log > profile.txt
 ### Emergency Procedures
 
 #### Service Recovery
+
 ```bash
 # Quick service restart
 pm2 restart bankgenie
@@ -1006,6 +1015,7 @@ pm2 restart bankgenie
 ```
 
 #### Database Recovery
+
 ```bash
 # Emergency database restore
 sudo systemctl stop postgresql

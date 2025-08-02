@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Real-time banking integration with major Algerian banks
 - Enhanced fraud detection with machine learning algorithms
 - Comprehensive admin dashboard with live analytics
@@ -15,12 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Professional UI/UX overhaul removing AI-generated appearance
 
 ### Changed
+
 - Updated branding from "BankGenie AI" to "BankGenie" for professional appearance
 - Improved messaging to focus on banking technology rather than AI terminology
 - Enhanced security protocols with bank-grade encryption
 - Optimized performance for large-scale banking operations
 
 ### Fixed
+
 - Resolved authentication flow issues
 - Fixed responsive design issues on mobile devices
 - Improved error handling throughout the application
@@ -29,7 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2024-01-15
 
 ### Added
+
 - **Real-time Banking Integration**
+
   - Direct connection to 8 major Algerian banks (BNA, CPA, BADR, BEA, BDL, AGB, SGA, HSBC)
   - Live transaction processing with fraud detection
   - Real-time account balance inquiries
@@ -37,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - WebSocket-based live data streaming
 
 - **Enhanced Security System**
+
   - AES-256 encryption for all data at rest
   - TLS 1.3 for data in transit
   - Multi-factor authentication with biometric support
@@ -45,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Complete audit logging
 
 - **Professional Banking Interface**
+
   - Multilingual support (Arabic MSA, French, Algerian Darija)
   - Professional chatbot interface without AI-generated appearance
   - Banking-appropriate color scheme and typography
@@ -52,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Accessibility compliance (WCAG 2.1)
 
 - **Comprehensive Admin Dashboard**
+
   - Real-time analytics and performance metrics
   - User management with role-based permissions
   - Transaction monitoring and reporting
@@ -59,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Data export capabilities (JSON, CSV, Excel)
 
 - **Credit Services Platform**
+
   - Advanced loan calculator with real financial algorithms
   - Credit scoring based on Algerian banking standards
   - Risk assessment with machine learning
@@ -73,7 +82,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Anti-money laundering monitoring
 
 ### Changed
+
 - **Architecture Overhaul**
+
   - Migrated to microservices architecture
   - Implemented event-driven design patterns
   - Added comprehensive caching with Redis
@@ -81,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhanced API performance and reliability
 
 - **User Experience**
+
   - Redesigned interface with banking industry standards
   - Improved navigation and user flows
   - Enhanced mobile responsiveness
@@ -95,7 +107,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Improved session management
 
 ### Fixed
+
 - **Performance Issues**
+
   - Resolved memory leaks in long-running processes
   - Optimized database connection pooling
   - Fixed slow API response times
@@ -103,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhanced caching strategies
 
 - **Security Vulnerabilities**
+
   - Patched all known security vulnerabilities
   - Updated all dependencies to latest secure versions
   - Fixed authentication bypass vulnerabilities
@@ -117,6 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhanced visual feedback for user actions
 
 ### Removed
+
 - Legacy authentication system
 - Deprecated API endpoints
 - Unused dependencies and code
@@ -126,7 +142,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.5.0] - 2023-12-01
 
 ### Added
+
 - **Multi-language Support**
+
   - Arabic (Modern Standard Arabic) interface
   - French language support
   - Algerian Darija (dialect) support
@@ -134,6 +152,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - RTL (Right-to-Left) text support
 
 - **Enhanced Chatbot**
+
   - Natural language processing for banking queries
   - Intent recognition with confidence scoring
   - Voice-to-text and text-to-speech capabilities
@@ -148,12 +167,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Card management services
 
 ### Changed
+
 - Improved chatbot response accuracy
 - Enhanced user interface design
 - Updated security protocols
 - Optimized mobile performance
 
 ### Fixed
+
 - Authentication timeout issues
 - Mobile rendering problems
 - API response time improvements
@@ -162,7 +183,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2023-10-15
 
 ### Added
+
 - **Initial Release**
+
   - Basic chatbot functionality
   - User authentication system
   - Simple account management
@@ -170,6 +193,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Admin dashboard prototype
 
 - **Core Features**
+
   - React-based frontend with TypeScript
   - Express.js backend with Node.js
   - PostgreSQL database integration
@@ -184,6 +208,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - CORS configuration
 
 ### Security
+
 - Implemented basic security measures
 - Added input sanitization
 - Configured secure session handling
@@ -192,6 +217,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.9.0] - 2023-09-01
 
 ### Added
+
 - **Beta Release**
   - Core banking chatbot prototype
   - Basic user management
@@ -200,12 +226,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Initial testing framework
 
 ### Changed
+
 - Migrated from JavaScript to TypeScript
 - Updated build system to Vite
 - Improved development workflow
 - Enhanced error handling
 
 ### Fixed
+
 - Database connection issues
 - Frontend build problems
 - API endpoint inconsistencies
@@ -214,6 +242,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.5.0] - 2023-08-01
 
 ### Added
+
 - **Alpha Release**
   - Initial project setup
   - Basic React frontend
@@ -222,6 +251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Development documentation
 
 ### Security
+
 - Basic authentication implementation
 - Initial security headers configuration
 - Environment variable management
@@ -233,17 +263,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Upgrading from 1.x to 2.x
 
 #### Breaking Changes
+
 - API endpoints have been restructured under `/api/v2/`
 - Authentication tokens now require different permissions
 - Database schema has been updated with new tables
 
 #### Migration Steps
+
 1. **Backup your database**
+
    ```bash
    pg_dump bankgenie_prod > backup_v1.sql
    ```
 
 2. **Update environment variables**
+
    ```bash
    # Add new required variables
    BANK_API_INTEGRATION=enabled
@@ -252,11 +286,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
    ```
 
 3. **Run database migrations**
+
    ```bash
    npm run db:migrate:v2
    ```
 
 4. **Update API integrations**
+
    - Update API endpoints to use `/api/v2/`
    - Update authentication headers
    - Handle new response formats
@@ -270,22 +306,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Upgrading from 0.x to 1.x
 
 #### Breaking Changes
+
 - Complete rewrite of authentication system
 - New database schema
 - Updated API endpoints
 
 #### Migration Steps
+
 1. **Export user data**
+
    ```bash
    npm run export:users:v0
    ```
 
 2. **Install fresh database**
+
    ```bash
    npm run db:setup:fresh
    ```
 
 3. **Import user data**
+
    ```bash
    npm run import:users:v1
    ```

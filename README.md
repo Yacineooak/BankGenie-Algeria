@@ -9,7 +9,7 @@ A comprehensive digital banking platform designed for financial institutions in 
 BankGenie is an enterprise-grade banking platform that modernizes financial institutions through:
 
 - **Digital Customer Service**: Multilingual support platform with real-time processing
-- **Advanced Security**: Bank-grade encryption and fraud detection systems  
+- **Advanced Security**: Bank-grade encryption and fraud detection systems
 - **Comprehensive Analytics**: Real-time reporting and performance monitoring
 - **Seamless Integration**: Connect with existing banking infrastructure
 - **Regulatory Compliance**: Built for Algerian banking regulations and international standards
@@ -17,24 +17,28 @@ BankGenie is an enterprise-grade banking platform that modernizes financial inst
 ## 🚀 Key Features
 
 ### Customer Service Platform
+
 - **Multilingual Support**: Arabic (MSA), French, and Algerian Darija
 - **Real-time Processing**: Instant account inquiries and transaction processing
 - **24/7 Availability**: Continuous service with 99.9% uptime SLA
 - **Smart Routing**: Intelligent query classification and response system
 
 ### Security & Compliance
+
 - **End-to-End Encryption**: AES-256 encryption for all data
 - **Fraud Detection**: Real-time behavioral analysis and risk assessment
 - **Regulatory Compliance**: GDPR, Bank of Algeria regulations
 - **Audit Trails**: Complete logging and monitoring capabilities
 
 ### Management Dashboard
+
 - **Real-time Analytics**: Performance metrics and operational insights
 - **User Management**: Role-based access control and permissions
 - **Reporting Tools**: Comprehensive data export and analysis
 - **System Monitoring**: Health checks and performance tracking
 
 ### Credit Services
+
 - **Loan Processing**: Automated application processing and evaluation
 - **Credit Scoring**: Advanced risk assessment algorithms
 - **Document Management**: KYC/AML workflow automation
@@ -43,6 +47,7 @@ BankGenie is an enterprise-grade banking platform that modernizes financial inst
 ## 🛠 Technology Stack
 
 ### Frontend
+
 - **React 18** with TypeScript
 - **Vite** for build tooling and development
 - **TailwindCSS** for responsive design
@@ -50,6 +55,7 @@ BankGenie is an enterprise-grade banking platform that modernizes financial inst
 - **React Router** for SPA navigation
 
 ### Backend
+
 - **Node.js** with Express framework
 - **TypeScript** for type safety
 - **Real-time WebSocket** connections
@@ -57,6 +63,7 @@ BankGenie is an enterprise-grade banking platform that modernizes financial inst
 - **Banking API** integrations
 
 ### Security
+
 - **JWT Authentication** with refresh tokens
 - **Rate Limiting** and DDoS protection
 - **Input Validation** and sanitization
@@ -64,6 +71,7 @@ BankGenie is an enterprise-grade banking platform that modernizes financial inst
 - **CORS** configuration
 
 ### Database & Storage
+
 - **PostgreSQL** for transactional data
 - **Redis** for caching and sessions
 - **File Storage** with encryption at rest
@@ -176,11 +184,13 @@ docker-compose up -d
 ### Environment-Specific Deployments
 
 #### Staging Deployment
+
 ```bash
 npm run deploy:staging
 ```
 
 #### Production Deployment
+
 ```bash
 npm run deploy:production
 ```
@@ -252,37 +262,42 @@ Configure structured logging:
 
 ```javascript
 // Log levels: error, warn, info, debug
-logger.info('Transaction processed', {
-  userId: '12345',
-  transactionId: 'TXN-67890',
-  amount: 1000.00,
-  currency: 'DZD'
+logger.info("Transaction processed", {
+  userId: "12345",
+  transactionId: "TXN-67890",
+  amount: 1000.0,
+  currency: "DZD",
 });
 ```
 
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm test
 ```
 
 ### Integration Tests
+
 ```bash
 npm run test:integration
 ```
 
 ### End-to-End Tests
+
 ```bash
 npm run test:e2e
 ```
 
 ### Performance Tests
+
 ```bash
 npm run test:performance
 ```
 
 ### Security Tests
+
 ```bash
 npm run test:security
 ```
@@ -301,6 +316,7 @@ curl -H "Authorization: Bearer YOUR_JWT_TOKEN" \
 ### Core Endpoints
 
 #### Account Management
+
 ```
 GET    /api/v1/accounts              # List user accounts
 GET    /api/v1/accounts/{id}         # Get account details
@@ -309,6 +325,7 @@ GET    /api/v1/accounts/{id}/history # Get transaction history
 ```
 
 #### Transaction Processing
+
 ```
 POST   /api/v1/transactions          # Create new transaction
 GET    /api/v1/transactions/{id}     # Get transaction details
@@ -317,6 +334,7 @@ DELETE /api/v1/transactions/{id}     # Cancel transaction
 ```
 
 #### Credit Services
+
 ```
 POST   /api/v1/loans/applications    # Submit loan application
 GET    /api/v1/loans/{id}            # Get loan details
@@ -325,6 +343,7 @@ GET    /api/v1/credit-score          # Get credit score
 ```
 
 #### System Operations
+
 ```
 GET    /api/v1/health                # System health check
 GET    /api/v1/status                # Service status
@@ -342,6 +361,7 @@ GET    /api/v1/metrics               # Performance metrics
 ### Adding New Languages
 
 1. Create language file in `client/locales/`:
+
 ```json
 {
   "common": {
@@ -358,12 +378,13 @@ GET    /api/v1/metrics               # Performance metrics
 ```
 
 2. Update language configuration:
+
 ```typescript
 export const supportedLanguages = {
-  ar: 'العرب��ة',
-  fr: 'Français', 
-  dz: 'الدارجة',
-  en: 'English' // New language
+  ar: "العرب��ة",
+  fr: "Français",
+  dz: "الدارجة",
+  en: "English", // New language
 };
 ```
 
@@ -374,33 +395,33 @@ export const supportedLanguages = {
 ```javascript
 // config/app.js
 module.exports = {
-  name: 'BankGenie',
-  version: '2.0.0',
+  name: "BankGenie",
+  version: "2.0.0",
   environment: process.env.NODE_ENV,
   port: process.env.PORT || 8080,
-  
+
   // Feature flags
   features: {
     realTimeUpdates: true,
     fraudDetection: true,
     biometricAuth: true,
-    voiceSupport: false
+    voiceSupport: false,
   },
-  
+
   // Rate limiting
   rateLimiting: {
     windowMs: 15 * 60 * 1000, // 15 minutes
     maxRequests: 100,
-    skipSuccessfulRequests: true
+    skipSuccessfulRequests: true,
   },
-  
+
   // Session configuration
   session: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
     httpOnly: true,
-    sameSite: 'strict'
-  }
+    sameSite: "strict",
+  },
 };
 ```
 
@@ -412,34 +433,34 @@ module.exports = {
   // Supported banks
   banks: [
     {
-      code: 'BNA',
-      name: 'Banque Nationale d\'Algérie',
-      apiUrl: 'https://api.bna.dz',
+      code: "BNA",
+      name: "Banque Nationale d'Algérie",
+      apiUrl: "https://api.bna.dz",
       timeout: 30000,
-      retries: 3
+      retries: 3,
     },
     {
-      code: 'CPA', 
-      name: 'Crédit Populaire d\'Algérie',
-      apiUrl: 'https://api.cpa.dz',
+      code: "CPA",
+      name: "Crédit Populaire d'Algérie",
+      apiUrl: "https://api.cpa.dz",
       timeout: 30000,
-      retries: 3
-    }
+      retries: 3,
+    },
   ],
-  
+
   // Transaction limits
   limits: {
     dailyTransfer: 1000000, // DZD
     monthlyTransfer: 10000000, // DZD
-    internationalTransfer: 100000 // DZD
+    internationalTransfer: 100000, // DZD
   },
-  
+
   // Fraud detection thresholds
   fraud: {
     velocityThreshold: 5, // transactions per hour
     amountThreshold: 500000, // DZD
-    locationRadius: 50 // kilometers
-  }
+    locationRadius: 50, // kilometers
+  },
 };
 ```
 
@@ -448,6 +469,7 @@ module.exports = {
 ### Common Issues
 
 #### Database Connection Errors
+
 ```bash
 # Check PostgreSQL status
 sudo systemctl status postgresql
@@ -457,6 +479,7 @@ psql -h localhost -U username -d bankgenie -c "SELECT 1;"
 ```
 
 #### Performance Issues
+
 ```bash
 # Monitor system resources
 htop
@@ -469,6 +492,7 @@ psql -d bankgenie -c "SELECT * FROM pg_stat_activity;"
 ```
 
 #### Authentication Problems
+
 ```bash
 # Verify JWT configuration
 node -e "console.log(require('jsonwebtoken').verify('TOKEN', 'SECRET'))"
@@ -481,6 +505,7 @@ redis-cli
 ### Debug Mode
 
 Enable debug logging:
+
 ```env
 LOG_LEVEL=debug
 DEBUG=bankgenie:*
@@ -543,17 +568,20 @@ We welcome contributions to BankGenie! Please read our [Contributing Guidelines]
 ## 📞 Support
 
 ### Documentation
+
 - [API Reference](docs/api-reference.md)
 - [User Guide](docs/user-guide.md)
 - [Administrator Guide](docs/admin-guide.md)
 - [Integration Guide](docs/integration-guide.md)
 
 ### Community Support
+
 - [GitHub Issues](https://github.com/your-org/bankgenie/issues)
 - [Discussion Forum](https://github.com/your-org/bankgenie/discussions)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/bankgenie)
 
 ### Commercial Support
+
 - Email: support@bankgenie.com
 - Phone: +213 XX XXX XXXX
 - Professional Services: consulting@bankgenie.com

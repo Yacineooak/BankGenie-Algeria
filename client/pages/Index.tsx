@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  MessageSquare, 
-  Shield, 
-  BarChart3, 
-  CreditCard, 
-  Languages, 
+import {
+  MessageSquare,
+  Shield,
+  BarChart3,
+  CreditCard,
+  Languages,
   Zap,
   CheckCircle,
   Star,
@@ -21,7 +27,7 @@ import {
   Globe,
   Phone,
   Mail,
-  MapPin
+  MapPin,
 } from "lucide-react";
 
 export default function Index() {
@@ -35,49 +41,73 @@ export default function Index() {
     {
       icon: MessageSquare,
       title: "Digital Banking Assistant",
-      description: "24/7 multilingual customer support in Arabic, French, and Darija",
-      details: ["Account management", "Transaction processing", "Credit services", "Branch information"]
+      description:
+        "24/7 multilingual customer support in Arabic, French, and Darija",
+      details: [
+        "Account management",
+        "Transaction processing",
+        "Credit services",
+        "Branch information",
+      ],
     },
     {
       icon: Shield,
       title: "Advanced Security System",
       description: "Real-time fraud prevention and transaction monitoring",
-      details: ["Behavioral analysis", "Transaction monitoring", "Risk assessment", "Identity verification"]
+      details: [
+        "Behavioral analysis",
+        "Transaction monitoring",
+        "Risk assessment",
+        "Identity verification",
+      ],
     },
     {
       icon: BarChart3,
       title: "Management Dashboard",
-      description: "Comprehensive analytics and reporting tools for banking operations",
-      details: ["Real-time analytics", "Performance metrics", "User management", "Data export"]
+      description:
+        "Comprehensive analytics and reporting tools for banking operations",
+      details: [
+        "Real-time analytics",
+        "Performance metrics",
+        "User management",
+        "Data export",
+      ],
     },
     {
       icon: CreditCard,
       title: "Credit Services",
       description: "Automated loan processing and credit evaluation system",
-      details: ["Loan applications", "Credit scoring", "Risk assessment", "Automated approval"]
-    }
+      details: [
+        "Loan applications",
+        "Credit scoring",
+        "Risk assessment",
+        "Automated approval",
+      ],
+    },
   ];
 
   const stats = [
     { value: "99.9%", label: "System Reliability" },
     { value: "24/7", label: "Service Availability" },
     { value: "3", label: "Language Support" },
-    { value: "Bank-Grade", label: "Security Standards" }
+    { value: "Bank-Grade", label: "Security Standards" },
   ];
 
   const testimonials = [
     {
-      quote: "BankGenie has significantly improved our customer service efficiency and reduced processing times.",
+      quote:
+        "BankGenie has significantly improved our customer service efficiency and reduced processing times.",
       author: "Ahmed Benali",
       role: "Operations Director, Banque Nationale d'Algérie",
-      rating: 5
+      rating: 5,
     },
     {
-      quote: "The multilingual support and security features have been essential for our digital transformation.",
+      quote:
+        "The multilingual support and security features have been essential for our digital transformation.",
       author: "Sarah Khaled",
       role: "IT Manager, Crédit Populaire d'Algérie",
-      rating: 5
-    }
+      rating: 5,
+    },
   ];
 
   return (
@@ -90,14 +120,33 @@ export default function Index() {
               <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
                 <MessageSquare className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">BankGenie</span>
+              <span className="text-xl font-bold text-foreground">
+                BankGenie
+              </span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
-              <a href="#security" className="text-muted-foreground hover:text-foreground transition-colors">Security</a>
-              <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+              <a
+                href="#features"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Services
+              </a>
+              <a
+                href="#security"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Security
+              </a>
+              <a
+                href="#pricing"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Pricing
+              </a>
               <Link to="/login">
-                <Button variant="outline" size="sm">Login</Button>
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
               </Link>
               <Link to="/chat">
                 <Button size="sm">Get Started</Button>
@@ -110,7 +159,9 @@ export default function Index() {
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          >
             <Badge variant="secondary" className="mb-4">
               Enterprise Banking Platform • Built for Algeria
             </Badge>
@@ -119,8 +170,9 @@ export default function Index() {
               <span className="text-primary block mt-2">Made Simple</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-              Comprehensive digital banking platform that modernizes customer service operations 
-              with multilingual support, advanced security, and seamless integration.
+              Comprehensive digital banking platform that modernizes customer
+              service operations with multilingual support, advanced security,
+              and seamless integration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/chat">
@@ -141,7 +193,9 @@ export default function Index() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-3xl font-bold text-primary mb-2">
+                  {stat.value}
+                </div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </div>
             ))}
@@ -157,13 +211,17 @@ export default function Index() {
               Complete Banking Solution
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything your financial institution needs to deliver exceptional customer service
+              Everything your financial institution needs to deliver exceptional
+              customer service
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-border hover:shadow-lg transition-shadow">
+              <Card
+                key={index}
+                className="border-border hover:shadow-lg transition-shadow"
+              >
                 <CardHeader>
                   <div className="flex items-center space-x-3">
                     <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -204,10 +262,26 @@ export default function Index() {
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: Users, title: "Retail Banking", desc: "Individual customer services" },
-              { icon: Building, title: "Corporate Banking", desc: "Business & enterprise solutions" },
-              { icon: HeadphonesIcon, title: "Support Teams", desc: "Customer service operations" },
-              { icon: TrendingUp, title: "Management", desc: "Analytics & decision making" }
+              {
+                icon: Users,
+                title: "Retail Banking",
+                desc: "Individual customer services",
+              },
+              {
+                icon: Building,
+                title: "Corporate Banking",
+                desc: "Business & enterprise solutions",
+              },
+              {
+                icon: HeadphonesIcon,
+                title: "Support Teams",
+                desc: "Customer service operations",
+              },
+              {
+                icon: TrendingUp,
+                title: "Management",
+                desc: "Analytics & decision making",
+              },
             ].map((user, index) => (
               <Card key={index} className="text-center border-border">
                 <CardHeader>
@@ -232,7 +306,8 @@ export default function Index() {
                 Enterprise Security & Compliance
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Built with banking-grade security standards and full regulatory compliance for the Algerian financial sector.
+                Built with banking-grade security standards and full regulatory
+                compliance for the Algerian financial sector.
               </p>
               <div className="space-y-4">
                 {[
@@ -241,7 +316,7 @@ export default function Index() {
                   "GDPR-compliant data handling and storage",
                   "Bank of Algeria regulatory compliance",
                   "Role-based access control system",
-                  "Complete audit trails and monitoring"
+                  "Complete audit trails and monitoring",
                 ].map((item, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-accent" />
@@ -256,14 +331,18 @@ export default function Index() {
                   { icon: Lock, title: "AES-256", desc: "Encryption" },
                   { icon: Shield, title: "ISO 27001", desc: "Certified" },
                   { icon: Globe, title: "GDPR", desc: "Compliant" },
-                  { icon: Zap, title: "99.9%", desc: "Uptime SLA" }
+                  { icon: Zap, title: "99.9%", desc: "Uptime SLA" },
                 ].map((item, index) => (
                   <div key={index} className="text-center">
                     <div className="h-12 w-12 bg-background rounded-lg flex items-center justify-center mx-auto mb-3">
                       <item.icon className="h-6 w-6 text-primary" />
                     </div>
-                    <div className="text-lg font-semibold text-foreground">{item.title}</div>
-                    <div className="text-sm text-muted-foreground">{item.desc}</div>
+                    <div className="text-lg font-semibold text-foreground">
+                      {item.title}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {item.desc}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -287,7 +366,10 @@ export default function Index() {
                 <CardHeader>
                   <div className="flex space-x-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                      />
                     ))}
                   </div>
                   <CardDescription className="text-lg italic">
@@ -296,8 +378,12 @@ export default function Index() {
                 </CardHeader>
                 <CardContent>
                   <div>
-                    <div className="font-semibold text-foreground">{testimonial.author}</div>
-                    <div className="text-muted-foreground">{testimonial.role}</div>
+                    <div className="font-semibold text-foreground">
+                      {testimonial.author}
+                    </div>
+                    <div className="text-muted-foreground">
+                      {testimonial.role}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -324,33 +410,59 @@ export default function Index() {
                 name: "Essential",
                 price: "From 1,500 DZD",
                 period: "per user/month",
-                features: ["Basic platform access", "Standard support", "Core banking integration", "Basic reporting"]
+                features: [
+                  "Basic platform access",
+                  "Standard support",
+                  "Core banking integration",
+                  "Basic reporting",
+                ],
               },
               {
                 name: "Professional",
                 price: "From 3,000 DZD",
                 period: "per user/month",
-                features: ["Advanced features", "Fraud detection", "Multilingual support", "Advanced analytics", "Priority support"],
-                popular: true
+                features: [
+                  "Advanced features",
+                  "Fraud detection",
+                  "Multilingual support",
+                  "Advanced analytics",
+                  "Priority support",
+                ],
+                popular: true,
               },
               {
                 name: "Enterprise",
                 price: "Custom",
                 period: "pricing",
-                features: ["On-premise deployment", "Custom integrations", "Dedicated support", "Training & onboarding", "SLA guarantees"]
-              }
+                features: [
+                  "On-premise deployment",
+                  "Custom integrations",
+                  "Dedicated support",
+                  "Training & onboarding",
+                  "SLA guarantees",
+                ],
+              },
             ].map((plan, index) => (
-              <Card key={index} className={`border-border relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
+              <Card
+                key={index}
+                className={`border-border relative ${plan.popular ? "ring-2 ring-primary" : ""}`}
+              >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">Recommended</Badge>
+                    <Badge className="bg-primary text-primary-foreground">
+                      Recommended
+                    </Badge>
                   </div>
                 )}
                 <CardHeader className="text-center">
                   <CardTitle className="text-xl">{plan.name}</CardTitle>
                   <div className="mt-4">
-                    <span className="text-3xl font-bold text-foreground">{plan.price}</span>
-                    <span className="text-muted-foreground ml-1">{plan.period}</span>
+                    <span className="text-3xl font-bold text-foreground">
+                      {plan.price}
+                    </span>
+                    <span className="text-muted-foreground ml-1">
+                      {plan.period}
+                    </span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -362,7 +474,10 @@ export default function Index() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full mt-6" variant={plan.popular ? "default" : "outline"}>
+                  <Button
+                    className="w-full mt-6"
+                    variant={plan.popular ? "default" : "outline"}
+                  >
                     Contact Sales
                   </Button>
                 </CardContent>
@@ -379,7 +494,8 @@ export default function Index() {
             Ready to Modernize Your Banking Operations?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join financial institutions across Algeria that trust BankGenie for their digital transformation.
+            Join financial institutions across Algeria that trust BankGenie for
+            their digital transformation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/kyc">
@@ -429,33 +545,120 @@ export default function Index() {
             <div>
               <h4 className="font-semibold text-foreground mb-4">Platform</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Services</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Security</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Integrations</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Security
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Integrations
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Documentation
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-foreground mb-4">Company</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Partners</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Partners
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-foreground mb-4">Support</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">System Status</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Help Center
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    System Status
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Terms of Service
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 BankGenie. All rights reserved. Licensed banking technology provider.</p>
+            <p>
+              &copy; 2024 BankGenie. All rights reserved. Licensed banking
+              technology provider.
+            </p>
           </div>
         </div>
       </footer>
