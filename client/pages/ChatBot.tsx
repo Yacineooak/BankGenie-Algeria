@@ -66,6 +66,43 @@ export default function ChatBot() {
     dz: { name: 'الدارجة', flag: '🇩🇿' }
   };
 
+  // Enhanced language switching with smooth transition
+  const handleLanguageChange = async (newLanguage: 'ar' | 'fr' | 'dz') => {
+    if (newLanguage === selectedLanguage) return;
+
+    setIsLanguageChanging(true);
+
+    // Brief pause for visual feedback
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    setSelectedLanguage(newLanguage);
+
+    // Update interface language and add system message
+    const languageNames = {
+      ar: 'العربية',
+      fr: 'Français',
+      dz: 'الدارجة الجزائرية'
+    };
+
+    const confirmationMessages = {
+      ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
+      fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
+      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوب�� غادي تكون بهاذ اللغة.`
+    };
+
+    const systemMessage: Message = {
+      id: Date.now().toString(),
+      text: confirmationMessages[newLanguage],
+      sender: 'system',
+      timestamp: new Date(),
+      intent: 'language_change',
+      type: 'success'
+    };
+
+    setMessages(prev => [...prev, systemMessage]);
+    setIsLanguageChanging(false);
+  };
+
   // Professional banking responses
   const professionalResponses = {
     greeting: {
@@ -409,7 +446,7 @@ export default function ChatBot() {
 
   const detectLanguage = (text: string): 'ar' | 'fr' | 'dz' => {
     const arabicPattern = /[\u0600-\u06FF]/;
-    const frenchPattern = /[àâäçéèêë��îôùûüÿ]/i;
+    const frenchPattern = /[àâäçéèêëïîôùûüÿ]/i;
     
     if (arabicPattern.test(text)) {
       const darija_patterns = ['راني', 'كيفاش', 'وين', 'شنو', 'بصح', 'يعني', 'برك'];
@@ -458,7 +495,7 @@ export default function ChatBot() {
   useEffect(() => {
     const welcomeMessage: Message = {
       id: '0',
-      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
+      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقدي�� خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       sender: 'bot',
       timestamp: new Date(),
       type: 'text'
