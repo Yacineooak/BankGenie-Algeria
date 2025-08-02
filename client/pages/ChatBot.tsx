@@ -89,7 +89,7 @@ export default function ChatBot() {
     const confirmationMessages = {
       ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
       fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
-      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`,
+      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ ��للغة.`,
       en: `Language changed to ${languageNames[newLanguage]}. All responses will be in this language.`
     };
 
@@ -119,7 +119,7 @@ export default function ChatBot() {
       dz: "تم جلب رصيد حسابك بنجاح. هاذي التفاصيل:"
     },
     error_professional: {
-      ar: "نعتذر لحدوث خطأ تقني. فريق الدعم الفني يعمل على حل المشكلة. يمكنك المحاولة مرة أخرى أو التواصل معنا.",
+      ar: "نعتذر لحدوث خطأ تقني. فريق الدعم الفني يعمل على حل المشكلة. يمكنك ا��محاولة مرة أخرى أو التواصل معنا.",
       fr: "Nous nous excusons pour cette erreur technique. Notre équipe technique travaille à résoudre le problème. Vous pouvez réessayer ou nous contacter.",
       dz: "نعتذرلك على هاذ الخطأ التقني. فريق الدعم يخدم على حل المشكل. ممكن تعاود المحاولة ولا تتواصل معانا."
     }
@@ -322,7 +322,7 @@ export default function ChatBot() {
           setTimeout(() => {
             const equivalentMessage: Message = {
               id: (Date.now() + 1).toString(),
-              text: `المبلغ بالعملات الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمريكي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
+              text: `المبلغ بالعمل��ت الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمريكي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
               sender: 'bot',
               timestamp: new Date(),
               data: data.data.equivalentAmounts,
@@ -346,7 +346,7 @@ export default function ChatBot() {
       
       const ratesMessage: Message = {
         id: Date.now().toString(),
-        text: `أسعار صرف العملات\n\n• الدولار الأم��يكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• الجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
+        text: `أسعار صرف العملات\n\n• الدولار الأمريكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• الجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
           hour: '2-digit',
           minute: '2-digit',
           day: 'numeric',
@@ -428,32 +428,38 @@ export default function ChatBot() {
       welcome: {
         ar: 'أهلاً وسهلاً بك في بنك جيني الذكي',
         fr: 'Bienvenue dans BankGenie Intelligent',
-        dz: 'مرحبا بيك في بنك جيني الذكي'
+        dz: 'مرحبا بيك في بنك جيني الذكي',
+        en: 'Welcome to BankGenie Intelligent'
       },
       assistant_name: {
         ar: 'مساعدك المصرفي الذكي',
         fr: 'Votre assistant bancaire intelligent',
-        dz: 'مساعدك البنكي الذكي'
+        dz: 'مساعدك البنكي الذكي',
+        en: 'Your Intelligent Banking Assistant'
       },
       connected_live: {
         ar: 'متصل مباشرة',
         fr: 'Connecté en direct',
-        dz: 'متصل مباشرة'
+        dz: 'متصل مباشرة',
+        en: 'Connected Live'
       },
       live_data: {
         ar: 'بيانات حية',
         fr: 'Données en direct',
-        dz: 'بيانات حية'
+        dz: 'بيانات حية',
+        en: 'Live Data'
       },
       typing: {
         ar: 'جاري الكتابة...',
         fr: 'En train d\'écrire...',
-        dz: 'راه يكتب...'
+        dz: 'راه يكتب...',
+        en: 'Typing...'
       },
       placeholder: {
         ar: 'اكتب استفسارك هنا...',
         fr: 'Tapez votre question ici...',
-        dz: 'اكتب السؤال ديالك هنا...'
+        dz: 'اكتب السؤال ديالك هنا...',
+        en: 'Type your inquiry here...'
       }
     };
 
@@ -535,9 +541,9 @@ export default function ChatBot() {
   // Dynamic welcome message based on selected language
   const getWelcomeMessage = (): Message => {
     const welcomeTexts = {
-      ar: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
+      ar: 'أهلاً وسه��اً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       fr: 'Bienvenue dans BankGenie Intelligent\n\nJe suis votre assistant bancaire intelligent, connecté directement au système bancaire algérien pour fournir des services instantanés et précis.\n\nJe peux vous aider avec:\n• Consultation des soldes de vos comptes\n• Affichage de l\'historique des transactions\n• Suivi des taux de change\n• Simulation de crédits et calcul d\'échéances\n• Services de cartes bancaires\n• Informations sur les agences et distributeurs\n\nComment puis-je vous aider aujourd\'hui?',
-      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنق��ر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟'
+      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟'
     };
 
     return {
