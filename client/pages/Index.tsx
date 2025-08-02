@@ -91,7 +91,7 @@ export default function Index() {
   const getStats = () => [
     { value: "99.9%", label: t('system_reliability') },
     { value: "24/7", label: t('service_availability') },
-    { value: "3", label: t('language_support') },
+    { value: "4", label: t('language_support') },
     { value: "Bank-Grade", label: t('security_standards') },
   ];
 
