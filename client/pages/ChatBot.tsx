@@ -87,7 +87,7 @@ export default function ChatBot() {
     const confirmationMessages = {
       ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
       fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
-      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`
+      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غ��دي تكون بهاذ اللغة.`
     };
 
     const systemMessage: Message = {
@@ -319,7 +319,7 @@ export default function ChatBot() {
           setTimeout(() => {
             const equivalentMessage: Message = {
               id: (Date.now() + 1).toString(),
-              text: `المبلغ بالعملات الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمريكي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
+              text: `المبلغ بالعملات الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمر��كي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
               sender: 'bot',
               timestamp: new Date(),
               data: data.data.equivalentAmounts,
@@ -406,7 +406,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك ا��متاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -750,7 +750,7 @@ export default function ChatBot() {
                 <Input
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  placeholder="اكتب استفسارك هنا..."
+                  placeholder={getLocalizedText('placeholder')}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   className="pr-12 bg-white border-primary/20 focus:border-primary rounded-xl h-12"
                 />
@@ -852,7 +852,7 @@ export default function ChatBot() {
                 <div className="flex items-center space-x-3">
                   <PhoneCall className="h-5 w-5 text-blue-600" />
                   <div>
-                    <p className="text-blue-800 font-medium">ت��تا�� مساعدة إضافية؟</p>
+                    <p className="text-blue-800 font-medium">تحتا�� مساعدة إضافية؟</p>
                     <p className="text-blue-700 text-sm">خدمة العملاء 24/7</p>
                   </div>
                 </div>
