@@ -406,7 +406,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة ال��ظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظ��م المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -786,25 +786,60 @@ export default function ChatBot() {
             
             {/* Professional Quick Actions */}
             <div className="flex flex-wrap gap-2 mt-3">
-              <Button variant="outline" size="sm" onClick={() => setInputText("رصيد حسابي")} className="rounded-full">
+              <Button variant="outline" size="sm" onClick={() => {
+                const queries = {
+                  ar: "رصيد حسابي",
+                  fr: "solde de compte",
+                  dz: "رصيد حسابي"
+                };
+                setInputText(queries[selectedLanguage]);
+              }} className="rounded-full transition-all duration-200">
                 <CreditCard className="h-3 w-3 mr-1" />
-                رصيد الحساب
+                {selectedLanguage === 'ar' ? 'رصيد الحساب' : selectedLanguage === 'fr' ? 'Solde' : 'رصيد الحساب'}
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("أسعار الصرف")} className="rounded-full">
+              <Button variant="outline" size="sm" onClick={() => {
+                const queries = {
+                  ar: "أسعار الصرف",
+                  fr: "taux de change",
+                  dz: "أسعار الصرف"
+                };
+                setInputText(queries[selectedLanguage]);
+              }} className="rounded-full transition-all duration-200">
                 <TrendingUp className="h-3 w-3 mr-1" />
-                أسعار الصرف
+                {selectedLanguage === 'ar' ? 'أسعار الصرف' : selectedLanguage === 'fr' ? 'Taux' : 'أسعار الصرف'}
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("آخر العمليات")} className="rounded-full">
+              <Button variant="outline" size="sm" onClick={() => {
+                const queries = {
+                  ar: "آخر العمليات",
+                  fr: "dernières transactions",
+                  dz: "آخر العمليات"
+                };
+                setInputText(queries[selectedLanguage]);
+              }} className="rounded-full transition-all duration-200">
                 <FileText className="h-3 w-3 mr-1" />
-                العمليات
+                {selectedLanguage === 'ar' ? 'العمليات' : selectedLanguage === 'fr' ? 'Transactions' : 'العمليات'}
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("حالة النظام")} className="rounded-full">
+              <Button variant="outline" size="sm" onClick={() => {
+                const queries = {
+                  ar: "حالة النظام",
+                  fr: "statut système",
+                  dz: "حالة النظام"
+                };
+                setInputText(queries[selectedLanguage]);
+              }} className="rounded-full transition-all duration-200">
                 <Shield className="h-3 w-3 mr-1" />
-                حالة ا��نظام
+                {selectedLanguage === 'ar' ? 'حالة النظام' : selectedLanguage === 'fr' ? 'Statut' : 'حالة النظام'}
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setInputText("أقرب فرع")} className="rounded-full">
+              <Button variant="outline" size="sm" onClick={() => {
+                const queries = {
+                  ar: "أقرب فرع",
+                  fr: "agence proche",
+                  dz: "أقرب فرع"
+                };
+                setInputText(queries[selectedLanguage]);
+              }} className="rounded-full transition-all duration-200">
                 <MapPin className="h-3 w-3 mr-1" />
-                الفروع
+                {selectedLanguage === 'ar' ? 'الفروع' : selectedLanguage === 'fr' ? 'Agences' : 'الفروع'}
               </Button>
             </div>
           </div>
