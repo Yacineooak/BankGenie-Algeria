@@ -68,7 +68,7 @@ export default function ChatBot() {
   };
 
   // Enhanced language switching with smooth transition
-  const handleLanguageChange = async (newLanguage: 'ar' | 'fr' | 'dz') => {
+  const handleLanguageChange = async (newLanguage: 'ar' | 'fr' | 'dz' | 'en') => {
     if (newLanguage === selectedLanguage) return;
 
     setIsLanguageChanging(true);
@@ -82,13 +82,15 @@ export default function ChatBot() {
     const languageNames = {
       ar: 'العربية',
       fr: 'Français',
-      dz: 'الدارجة الجزائرية'
+      dz: 'الدارجة الجزائرية',
+      en: 'English'
     };
 
     const confirmationMessages = {
       ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
       fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
-      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`
+      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`,
+      en: `Language changed to ${languageNames[newLanguage]}. All responses will be in this language.`
     };
 
     const systemMessage: Message = {
@@ -344,7 +346,7 @@ export default function ChatBot() {
       
       const ratesMessage: Message = {
         id: Date.now().toString(),
-        text: `أسعار صرف العملات\n\n• الدولار الأمريكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• الجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
+        text: `أسعار صرف العملات\n\n• الدولار الأم��يكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• الجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
           hour: '2-digit',
           minute: '2-digit',
           day: 'numeric',
@@ -407,7 +409,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات ال��وم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -535,7 +537,7 @@ export default function ChatBot() {
     const welcomeTexts = {
       ar: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       fr: 'Bienvenue dans BankGenie Intelligent\n\nJe suis votre assistant bancaire intelligent, connecté directement au système bancaire algérien pour fournir des services instantanés et précis.\n\nJe peux vous aider avec:\n• Consultation des soldes de vos comptes\n• Affichage de l\'historique des transactions\n• Suivi des taux de change\n• Simulation de crédits et calcul d\'échéances\n• Services de cartes bancaires\n• Informations sur les agences et distributeurs\n\nComment puis-je vous aider aujourd\'hui?',
-      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟'
+      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنق��ر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟'
     };
 
     return {
