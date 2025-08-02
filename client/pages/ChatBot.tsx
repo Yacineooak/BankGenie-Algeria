@@ -261,7 +261,7 @@ export default function ChatBot() {
       }
     } catch (error) {
       console.error('Chat processing error:', error);
-      addErrorMessage("الخدمة غير متاحة مؤقتاً. ن��مل على إصلاح المشكلة، يرجى المحاولة خلال دقائق.");
+      addErrorMessage("الخدمة غير متاحة مؤقتاً. نعمل على إصلاح المشكلة، يرجى المحاولة خلال دقائق.");
     } finally {
       setIsTyping(false);
     }
@@ -331,7 +331,7 @@ export default function ChatBot() {
       }
     } catch (error) {
       console.error('Balance fetch error:', error);
-      addErrorMessage("نعتذر، لا يمكن الوصول لرصيد الحساب في الوقت الحالي. يرجى المحاولة لا��قاً.");
+      addErrorMessage("نعتذر، لا يمكن الوصول لرصيد الحساب في الوقت الحالي. يرجى المحاولة لاحقاً.");
     }
   };
 
@@ -369,7 +369,7 @@ export default function ChatBot() {
         const data = await response.json();
         const transactions = data.data.transactions.slice(0, 4);
         
-        let historyText = "آخر العمليات المصرفية\n\n";
+        let historyText = "آخر العم��يات المصرفية\n\n";
         transactions.forEach((txn: any, index: number) => {
           const type = txn.transactionType === 'CREDIT' ? 'إيداع' : 'سحب';
           const amount = txn.amount.value.toLocaleString('ar-DZ');
@@ -406,7 +406,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المص��في\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -576,9 +576,13 @@ export default function ChatBot() {
                   <Bot className="h-7 w-7 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-white">بنك جيني الذكي</CardTitle>
+                  <CardTitle className="text-xl text-white transition-all duration-300">
+                    {getLocalizedText('welcome')}
+                  </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <p className="text-white/90 text-sm">مساعدك المصرفي الذكي</p>
+                    <p className="text-white/90 text-sm transition-all duration-300">
+                      {getLocalizedText('assistant_name')}
+                    </p>
                     {realTimeData.systemStatus && (
                       <Badge variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
                         <Zap className="h-3 w-3 mr-1" />
