@@ -87,7 +87,7 @@ export default function ChatBot() {
     const confirmationMessages = {
       ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
       fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
-      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوب�� غادي تكون بهاذ اللغة.`
+      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`
     };
 
     const systemMessage: Message = {
@@ -419,6 +419,44 @@ export default function ChatBot() {
     }
   };
 
+  // Dynamic text based on selected language
+  const getLocalizedText = (key: string) => {
+    const texts = {
+      welcome: {
+        ar: 'أهلاً وسهلاً بك في بنك جيني الذكي',
+        fr: 'Bienvenue dans BankGenie Intelligent',
+        dz: 'مرحبا بيك في بنك جيني الذكي'
+      },
+      assistant_name: {
+        ar: 'مساعدك المصرفي الذكي',
+        fr: 'Votre assistant bancaire intelligent',
+        dz: 'مساعدك البنكي الذكي'
+      },
+      connected_live: {
+        ar: 'متصل مباشرة',
+        fr: 'Connecté en direct',
+        dz: 'متصل مباشرة'
+      },
+      live_data: {
+        ar: 'بيانات حية',
+        fr: 'Données en direct',
+        dz: 'بيانات حية'
+      },
+      typing: {
+        ar: 'جاري الكتابة...',
+        fr: 'En train d\'écrire...',
+        dz: 'راه يكتب...'
+      },
+      placeholder: {
+        ar: 'اكتب استفسارك هنا...',
+        fr: 'Tapez votre question ici...',
+        dz: 'اكتب السؤال ديالك هنا...'
+      }
+    };
+
+    return texts[key]?.[selectedLanguage] || texts[key]?.ar || '';
+  };
+
   // Helper functions
   const addSystemMessage = (text: string, type: string) => {
     const systemMessage: Message = {
@@ -495,7 +533,7 @@ export default function ChatBot() {
   useEffect(() => {
     const welcomeMessage: Message = {
       id: '0',
-      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقدي�� خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
+      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       sender: 'bot',
       timestamp: new Date(),
       type: 'text'
