@@ -406,7 +406,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? '��ليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك ا��متاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -729,7 +729,9 @@ export default function ChatBot() {
                       <div className="bg-muted rounded-2xl px-4 py-3 shadow-sm">
                         <div className="flex items-center space-x-2">
                           <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                          <span className="text-sm text-muted-foreground">جاري الكتابة...</span>
+                          <span className="text-sm text-muted-foreground transition-all duration-300">
+                            {getLocalizedText('typing')}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -850,7 +852,7 @@ export default function ChatBot() {
                 <div className="flex items-center space-x-3">
                   <PhoneCall className="h-5 w-5 text-blue-600" />
                   <div>
-                    <p className="text-blue-800 font-medium">تحتا�� مساعدة إضافية؟</p>
+                    <p className="text-blue-800 font-medium">ت��تا�� مساعدة إضافية؟</p>
                     <p className="text-blue-700 text-sm">خدمة العملاء 24/7</p>
                   </div>
                 </div>
