@@ -87,7 +87,7 @@ export default function ChatBot() {
     const confirmationMessages = {
       ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
       fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
-      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غ��دي تكون بهاذ اللغة.`
+      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`
     };
 
     const systemMessage: Message = {
@@ -319,7 +319,7 @@ export default function ChatBot() {
           setTimeout(() => {
             const equivalentMessage: Message = {
               id: (Date.now() + 1).toString(),
-              text: `المبلغ بالعملات الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمر��كي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
+              text: `المبلغ بالعملات الأجنبية:\n\n• ${data.data.equivalentAmounts.USD} دولار أمريكي\n• ${data.data.equivalentAmounts.EUR} يورو\n• ${data.data.equivalentAmounts.GBP} جنيه إسترليني\n\nحسب أسعار الصرف الحالية`,
               sender: 'bot',
               timestamp: new Date(),
               data: data.data.equivalentAmounts,
@@ -406,7 +406,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المصرفي\n\n• حالة ال��ظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -529,17 +529,27 @@ export default function ChatBot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Professional welcome message
-  useEffect(() => {
-    const welcomeMessage: Message = {
+  // Dynamic welcome message based on selected language
+  const getWelcomeMessage = (): Message => {
+    const welcomeTexts = {
+      ar: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
+      fr: 'Bienvenue dans BankGenie Intelligent\n\nJe suis votre assistant bancaire intelligent, connecté directement au système bancaire algérien pour fournir des services instantanés et précis.\n\nJe peux vous aider avec:\n• Consultation des soldes de vos comptes\n• Affichage de l\'historique des transactions\n• Suivi des taux de change\n• Simulation de crédits et calcul d\'échéances\n• Services de cartes bancaires\n• Informations sur les agences et distributeurs\n\nComment puis-je vous aider aujourd\'hui?',
+      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟'
+    };
+
+    return {
       id: '0',
-      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
+      text: welcomeTexts[selectedLanguage],
       sender: 'bot',
       timestamp: new Date(),
       type: 'text'
     };
-    setMessages([welcomeMessage]);
-  }, []);
+  };
+
+  // Professional welcome message with language updates
+  useEffect(() => {
+    setMessages([getWelcomeMessage()]);
+  }, [selectedLanguage]);
 
   const getMessageStyle = (message: Message) => {
     if (message.sender === 'user') {
@@ -790,7 +800,7 @@ export default function ChatBot() {
               </Button>
               <Button variant="outline" size="sm" onClick={() => setInputText("حالة النظام")} className="rounded-full">
                 <Shield className="h-3 w-3 mr-1" />
-                حالة النظام
+                حالة ا��نظام
               </Button>
               <Button variant="outline" size="sm" onClick={() => setInputText("أقرب فرع")} className="rounded-full">
                 <MapPin className="h-3 w-3 mr-1" />
