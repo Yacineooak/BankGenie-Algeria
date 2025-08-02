@@ -450,7 +450,7 @@ export default function ChatBot() {
         en: 'Live Data'
       },
       typing: {
-        ar: 'جاري الكتابة...',
+        ar: 'ج��ري الكتابة...',
         fr: 'En train d\'écrire...',
         dz: 'راه يكتب...',
         en: 'Typing...'
@@ -541,9 +541,9 @@ export default function ChatBot() {
   // Dynamic welcome message based on selected language
   const getWelcomeMessage = (): Message => {
     const welcomeTexts = {
-      ar: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك ا��يوم؟',
+      ar: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       fr: 'Bienvenue dans BankGenie Intelligent\n\nJe suis votre assistant bancaire intelligent, connecté directement au système bancaire algérien pour fournir des services instantanés et précis.\n\nJe peux vous aider avec:\n• Consultation des soldes de vos comptes\n• Affichage de l\'historique des transactions\n• Suivi des taux de change\n• Simulation de crédits et calcul d\'échéances\n• Services de cartes bancaires\n• Informations sur les agences et distributeurs\n\nComment puis-je vous aider aujourd\'hui?',
-      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟',
+      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة با��نظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟',
       en: 'Welcome to BankGenie Intelligent\n\nI am your intelligent banking assistant, directly connected to the Algerian banking system to provide instant and accurate services.\n\nI can help you with:\n• Account balance inquiries\n• Transaction history display\n• Currency exchange rates tracking\n• Credit simulation and installment calculation\n• Banking card services\n• Branch and ATM information\n\nHow can I serve you today?'
     };
 
@@ -800,56 +800,71 @@ export default function ChatBot() {
                 const queries = {
                   ar: "رصيد حسابي",
                   fr: "solde de compte",
-                  dz: "رصيد حسابي"
+                  dz: "رصيد حسابي",
+                  en: "account balance"
                 };
                 setInputText(queries[selectedLanguage]);
               }} className="rounded-full transition-all duration-200">
                 <CreditCard className="h-3 w-3 mr-1" />
-                {selectedLanguage === 'ar' ? 'رصيد الحساب' : selectedLanguage === 'fr' ? 'Solde' : 'رصيد الحساب'}
+                {selectedLanguage === 'ar' ? 'رصيد الحساب' :
+                 selectedLanguage === 'fr' ? 'Solde' :
+                 selectedLanguage === 'dz' ? 'رصيد الحساب' : 'Balance'}
               </Button>
               <Button variant="outline" size="sm" onClick={() => {
                 const queries = {
                   ar: "أسعار الصرف",
                   fr: "taux de change",
-                  dz: "أسعار الصرف"
+                  dz: "أسعار الصرف",
+                  en: "exchange rates"
                 };
                 setInputText(queries[selectedLanguage]);
               }} className="rounded-full transition-all duration-200">
                 <TrendingUp className="h-3 w-3 mr-1" />
-                {selectedLanguage === 'ar' ? 'أسعار الصرف' : selectedLanguage === 'fr' ? 'Taux' : 'أسعار الصرف'}
+                {selectedLanguage === 'ar' ? 'أسعار الصرف' :
+                 selectedLanguage === 'fr' ? 'Taux' :
+                 selectedLanguage === 'dz' ? 'أسعار الصرف' : 'Rates'}
               </Button>
               <Button variant="outline" size="sm" onClick={() => {
                 const queries = {
                   ar: "آخر العمليات",
                   fr: "dernières transactions",
-                  dz: "آخر العمليات"
+                  dz: "آخر العمليات",
+                  en: "recent transactions"
                 };
                 setInputText(queries[selectedLanguage]);
               }} className="rounded-full transition-all duration-200">
                 <FileText className="h-3 w-3 mr-1" />
-                {selectedLanguage === 'ar' ? 'العمليات' : selectedLanguage === 'fr' ? 'Transactions' : 'العمليات'}
+                {selectedLanguage === 'ar' ? 'العملي��ت' :
+                 selectedLanguage === 'fr' ? 'Transactions' :
+                 selectedLanguage === 'dz' ? 'العمليات' : 'Transactions'}
               </Button>
               <Button variant="outline" size="sm" onClick={() => {
                 const queries = {
                   ar: "حالة النظام",
                   fr: "statut système",
-                  dz: "حالة النظام"
+                  dz: "حالة النظام",
+                  en: "system status"
                 };
                 setInputText(queries[selectedLanguage]);
               }} className="rounded-full transition-all duration-200">
                 <Shield className="h-3 w-3 mr-1" />
-                {selectedLanguage === 'ar' ? 'حالة النظام' : selectedLanguage === 'fr' ? 'Statut' : 'حالة النظام'}
+                {selectedLanguage === 'ar' ? 'حالة النظام' :
+                 selectedLanguage === 'fr' ? 'Statut' :
+                 selectedLanguage === 'dz' ? 'حالة النظام' : 'Status'}
               </Button>
               <Button variant="outline" size="sm" onClick={() => {
                 const queries = {
                   ar: "أقرب فرع",
                   fr: "agence proche",
-                  dz: "أقرب فرع"
+                  dz: "أقرب فرع",
+                  en: "nearest branch"
                 };
                 setInputText(queries[selectedLanguage]);
               }} className="rounded-full transition-all duration-200">
                 <MapPin className="h-3 w-3 mr-1" />
-                {selectedLanguage === 'ar' ? 'الفروع' : selectedLanguage === 'fr' ? 'Agences' : 'الفروع'}
+                {selectedLanguage === 'ar' ? 'الفروع' :
+                 selectedLanguage === 'fr' ? 'Agences' :
+                 selectedLanguage === 'dz' ? 'الفروع' : 'Branches'}
               </Button>
             </div>
           </div>
