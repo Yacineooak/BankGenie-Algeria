@@ -52,6 +52,7 @@ export default function ChatBot() {
   const [inputText, setInputText] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<'ar' | 'fr' | 'dz'>('ar');
+  const [isLanguageChanging, setIsLanguageChanging] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [realTimeData, setRealTimeData] = useState<RealTimeData>({});
@@ -408,7 +409,7 @@ export default function ChatBot() {
 
   const detectLanguage = (text: string): 'ar' | 'fr' | 'dz' => {
     const arabicPattern = /[\u0600-\u06FF]/;
-    const frenchPattern = /[àâäçéèêëïîôùûüÿ]/i;
+    const frenchPattern = /[àâäçéèêë��îôùûüÿ]/i;
     
     if (arabicPattern.test(text)) {
       const darija_patterns = ['راني', 'كيفاش', 'وين', 'شنو', 'بصح', 'يعني', 'برك'];
