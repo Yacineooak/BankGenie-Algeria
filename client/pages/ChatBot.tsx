@@ -63,7 +63,8 @@ export default function ChatBot() {
   const languages = {
     ar: { name: 'العربية', flag: '🇩🇿' },
     fr: { name: 'Français', flag: '🇫🇷' },
-    dz: { name: 'الدارجة', flag: '🇩🇿' }
+    dz: { name: 'الدارجة', flag: '🇩🇿' },
+    en: { name: 'English', flag: '🇺🇸' }
   };
 
   // Enhanced language switching with smooth transition
@@ -343,7 +344,7 @@ export default function ChatBot() {
       
       const ratesMessage: Message = {
         id: Date.now().toString(),
-        text: `أسعار صرف العملات\n\n• الدولار الأمريكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• ��لجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
+        text: `أسعار صرف العملات\n\n• الدولار الأمريكي: ${rates.USD} د.ج\n• اليورو: ${rates.EUR} د.ج\n• الجنيه الإسترليني: ${rates.GBP} د.ج\n• الريال السعودي: ${rates.SAR} د.ج\n• الدرهم المغربي: ${rates.MAD} د.ج\n\nآخر تحديث: ${timestamp.toLocaleString('ar-DZ', {
           hour: '2-digit',
           minute: '2-digit',
           day: 'numeric',
@@ -406,7 +407,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجمي�� الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات ال��وم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
