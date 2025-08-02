@@ -261,7 +261,7 @@ export default function ChatBot() {
       }
     } catch (error) {
       console.error('Chat processing error:', error);
-      addErrorMessage("الخدمة غير متاحة مؤقتاً. نعمل على إصلاح المشكلة، يرجى المحاولة خلال دقائق.");
+      addErrorMessage("الخدمة غير متاحة مؤقتاً. ن��مل على إصلاح المشكلة، يرجى المحاولة خلال دقائق.");
     } finally {
       setIsTyping(false);
     }
@@ -331,7 +331,7 @@ export default function ChatBot() {
       }
     } catch (error) {
       console.error('Balance fetch error:', error);
-      addErrorMessage("نعتذر، لا يمكن الوصول لرصيد الحساب في الوقت الحالي. يرجى المحاولة لاحقاً.");
+      addErrorMessage("نعتذر، لا يمكن الوصول لرصيد الحساب في الوقت الحالي. يرجى المحاولة لا��قاً.");
     }
   };
 
@@ -590,18 +590,30 @@ export default function ChatBot() {
               </div>
               
               <div className="flex items-center space-x-2">
-                <Languages className="h-4 w-4 text-white/80" />
-                <select 
-                  value={selectedLanguage} 
-                  onChange={(e) => setSelectedLanguage(e.target.value as any)}
-                  className="bg-white/20 border border-white/30 rounded-md px-2 py-1 text-white text-sm backdrop-blur-sm"
-                >
-                  {Object.entries(languages).map(([code, lang]) => (
-                    <option key={code} value={code} className="text-gray-900">
-                      {lang.flag} {lang.name}
-                    </option>
-                  ))}
-                </select>
+                <Languages className={`h-4 w-4 text-white/80 transition-transform duration-300 ${
+                  isLanguageChanging ? 'rotate-180 scale-110' : ''
+                }`} />
+                <div className="relative">
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => handleLanguageChange(e.target.value as any)}
+                    disabled={isLanguageChanging}
+                    className={`bg-white/20 border border-white/30 rounded-md px-2 py-1 text-white text-sm backdrop-blur-sm transition-all duration-300 ${
+                      isLanguageChanging ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/30'
+                    }`}
+                  >
+                    {Object.entries(languages).map(([code, lang]) => (
+                      <option key={code} value={code} className="text-gray-900 bg-white">
+                        {lang.flag} {lang.name}
+                      </option>
+                    ))}
+                  </select>
+                  {isLanguageChanging && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Loader2 className="h-3 w-3 animate-spin text-white" />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             
