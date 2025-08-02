@@ -87,7 +87,7 @@ export default function ChatBot() {
     const confirmationMessages = {
       ar: `تم تغيير اللغة إلى ${languageNames[newLanguage]}. جميع الردود ستكون بهذه اللغة.`,
       fr: `Langue changée vers ${languageNames[newLanguage]}. Toutes les réponses seront dans cette langue.`,
-      dz: `تبدلت اللغة ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`
+      dz: `تبدلت اللغ�� ل ${languageNames[newLanguage]}. كلش الأجوبة غادي تكون بهاذ اللغة.`
     };
 
     const systemMessage: Message = {
@@ -116,7 +116,7 @@ export default function ChatBot() {
       dz: "تم جلب رصيد حسابك بنجاح. هاذي التفاصيل:"
     },
     error_professional: {
-      ar: "نعتذر لحدوث خطأ تقني. فريق الدعم الفني يعمل على حل المشكلة. يمكنك المحاولة مرة أخرى أو التواصل معنا.",
+      ar: "نعتذر لحدوث خطأ تقني. فريق الدعم الفني يعمل على حل المشكلة. يمكنك المحاولة مر�� أخرى أو التواصل معنا.",
       fr: "Nous nous excusons pour cette erreur technique. Notre équipe technique travaille à résoudre le problème. Vous pouvez réessayer ou nous contacter.",
       dz: "نعتذرلك على هاذ الخطأ التقني. فريق الدعم يخدم على حل المشكل. ممكن تعاود المحاولة ولا تتواصل معانا."
     }
@@ -369,7 +369,7 @@ export default function ChatBot() {
         const data = await response.json();
         const transactions = data.data.transactions.slice(0, 4);
         
-        let historyText = "آخر العم��يات المصرفية\n\n";
+        let historyText = "آخر العمليات المصرفية\n\n";
         transactions.forEach((txn: any, index: number) => {
           const type = txn.transactionType === 'CREDIT' ? 'إيداع' : 'سحب';
           const amount = txn.amount.value.toLocaleString('ar-DZ');
@@ -406,7 +406,7 @@ export default function ChatBot() {
         
         const statusMessage: Message = {
           id: Date.now().toString(),
-          text: `حالة النظام المص��في\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
+          text: `حالة النظام المصرفي\n\n• حالة النظام: ${data.data.systemHealth === 'HEALTHY' ? 'سليم' : 'تحت المراجعة'}\n• معدل التشغيل: ${data.data.uptime}%\n• العمليات اليوم: ${data.data.totalTransactions.toLocaleString('ar-DZ')}\n• أمان العمليات: ${data.data.fraudDetectionRate}%\n• البنوك المتاحة: ${onlineBanks} من 8 بنوك\n\nجميع الخدمات تعمل بشكل طبيعي`,
           sender: 'bot',
           timestamp: new Date(),
           data: data.data,
@@ -533,7 +533,7 @@ export default function ChatBot() {
   useEffect(() => {
     const welcomeMessage: Message = {
       id: '0',
-      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
+      text: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مس��عدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       sender: 'bot',
       timestamp: new Date(),
       type: 'text'
@@ -586,7 +586,7 @@ export default function ChatBot() {
                     {realTimeData.systemStatus && (
                       <Badge variant="secondary" className="text-xs bg-white/20 text-white border-white/30">
                         <Zap className="h-3 w-3 mr-1" />
-                        متصل مباشرة
+                        {getLocalizedText('connected_live')}
                       </Badge>
                     )}
                   </div>
