@@ -18,7 +18,10 @@ import {
   HeadphonesIcon,
   TrendingUp,
   Lock,
-  Globe
+  Globe,
+  Phone,
+  Mail,
+  MapPin
 } from "lucide-react";
 
 export default function Index() {
@@ -31,48 +34,48 @@ export default function Index() {
   const features = [
     {
       icon: MessageSquare,
-      title: "Multilingual AI Chatbot",
-      description: "24/7 support in Arabic (MSA), French, and Algerian Derja with auto-detection",
-      details: ["Account inquiries", "Credit simulation", "Card services", "Branch locator"]
+      title: "Digital Banking Assistant",
+      description: "24/7 multilingual customer support in Arabic, French, and Darija",
+      details: ["Account management", "Transaction processing", "Credit services", "Branch information"]
     },
     {
       icon: Shield,
-      title: "Advanced Fraud Detection",
-      description: "Real-time security monitoring and anomaly detection",
-      details: ["Suspicious behavior alerts", "Transaction monitoring", "National fraud blacklist", "Biometric verification"]
+      title: "Advanced Security System",
+      description: "Real-time fraud prevention and transaction monitoring",
+      details: ["Behavioral analysis", "Transaction monitoring", "Risk assessment", "Identity verification"]
     },
     {
       icon: BarChart3,
-      title: "Admin Dashboard",
-      description: "Comprehensive analytics and management tools for bank staff",
-      details: ["Real-time analytics", "NLP feedback engine", "Role-based access", "Exportable reports"]
+      title: "Management Dashboard",
+      description: "Comprehensive analytics and reporting tools for banking operations",
+      details: ["Real-time analytics", "Performance metrics", "User management", "Data export"]
     },
     {
       icon: CreditCard,
-      title: "Loan & Credit Simulation",
-      description: "AI-driven eligibility scoring and credit risk assessment",
-      details: ["Guided application forms", "Real-time scoring", "Credit bureau integration", "Risk modeling"]
+      title: "Credit Services",
+      description: "Automated loan processing and credit evaluation system",
+      details: ["Loan applications", "Credit scoring", "Risk assessment", "Automated approval"]
     }
   ];
 
   const stats = [
-    { value: "99.9%", label: "Uptime SLA" },
-    { value: "24/7", label: "Availability" },
-    { value: "3", label: "Languages Supported" },
-    { value: "AES-256", label: "Encryption Standard" }
+    { value: "99.9%", label: "System Reliability" },
+    { value: "24/7", label: "Service Availability" },
+    { value: "3", label: "Language Support" },
+    { value: "Bank-Grade", label: "Security Standards" }
   ];
 
   const testimonials = [
     {
-      quote: "BankGenie AI has transformed our customer service operations, reducing queue times by 70%.",
+      quote: "BankGenie has significantly improved our customer service efficiency and reduced processing times.",
       author: "Ahmed Benali",
-      role: "IT Director, Banque Nationale",
+      role: "Operations Director, Banque Nationale d'Algérie",
       rating: 5
     },
     {
-      quote: "The multilingual support and fraud detection capabilities are exactly what we needed.",
+      quote: "The multilingual support and security features have been essential for our digital transformation.",
       author: "Sarah Khaled",
-      role: "Operations Manager, Credit Populaire",
+      role: "IT Manager, Crédit Populaire d'Algérie",
       rating: 5
     }
   ];
@@ -87,17 +90,17 @@ export default function Index() {
               <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
                 <MessageSquare className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">BankGenie AI</span>
+              <span className="text-xl font-bold text-foreground">BankGenie</span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Services</a>
               <a href="#security" className="text-muted-foreground hover:text-foreground transition-colors">Security</a>
               <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
               <Link to="/login">
                 <Button variant="outline" size="sm">Login</Button>
               </Link>
               <Link to="/chat">
-                <Button size="sm">Try ChatBot</Button>
+                <Button size="sm">Get Started</Button>
               </Link>
             </div>
           </div>
@@ -109,26 +112,26 @@ export default function Index() {
         <div className="container mx-auto text-center">
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <Badge variant="secondary" className="mb-4">
-              Enterprise-Grade Banking AI • Made for Algeria
+              Enterprise Banking Platform • Built for Algeria
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Transform Your Bank with
-              <span className="text-primary block mt-2">Conversational AI</span>
+              Modern Banking
+              <span className="text-primary block mt-2">Made Simple</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-              Secure, intelligent NLP agent that transforms outdated banking systems into modern, 
-              self-service platforms. Supporting Arabic, French, and Algerian Derja.
+              Comprehensive digital banking platform that modernizes customer service operations 
+              with multilingual support, advanced security, and seamless integration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/chat">
                 <Button size="lg" className="h-12 px-8">
-                  Try AI Assistant
+                  Try Platform
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link to="/loan-simulator">
                 <Button variant="outline" size="lg" className="h-12 px-8">
-                  Loan Calculator
+                  Credit Calculator
                 </Button>
               </Link>
             </div>
@@ -151,10 +154,10 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Comprehensive Banking AI Solution
+              Complete Banking Solution
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything your bank needs to provide modern, secure, and efficient customer service
+              Everything your financial institution needs to deliver exceptional customer service
             </p>
           </div>
 
@@ -195,16 +198,16 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Built for Every Banking Stakeholder
+              Designed for Every Banking Professional
             </h2>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: Users, title: "Retail Clients", desc: "Personal banking services" },
-              { icon: Building, title: "Corporate Clients", desc: "Business & SME solutions" },
-              { icon: HeadphonesIcon, title: "Bank Employees", desc: "Support & relationship management" },
-              { icon: TrendingUp, title: "Bank Executives", desc: "Analytics & decision-making" }
+              { icon: Users, title: "Retail Banking", desc: "Individual customer services" },
+              { icon: Building, title: "Corporate Banking", desc: "Business & enterprise solutions" },
+              { icon: HeadphonesIcon, title: "Support Teams", desc: "Customer service operations" },
+              { icon: TrendingUp, title: "Management", desc: "Analytics & decision making" }
             ].map((user, index) => (
               <Card key={index} className="text-center border-border">
                 <CardHeader>
@@ -226,19 +229,19 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Bank-Grade Security & Compliance
+                Enterprise Security & Compliance
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Built with enterprise security standards and full compliance with Algerian banking regulations.
+                Built with banking-grade security standards and full regulatory compliance for the Algerian financial sector.
               </p>
               <div className="space-y-4">
                 {[
-                  "AES-256 encryption at rest, TLS 1.3 in transit",
-                  "Two-factor authentication with biometric support",
-                  "GDPR-compliant consent collection",
-                  "Bank of Algeria data residency compliance",
-                  "Role-based access control (RBAC)",
-                  "Complete activity logs and alerts"
+                  "End-to-end encryption with AES-256 standards",
+                  "Multi-factor authentication and biometric support",
+                  "GDPR-compliant data handling and storage",
+                  "Bank of Algeria regulatory compliance",
+                  "Role-based access control system",
+                  "Complete audit trails and monitoring"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-accent" />
@@ -274,7 +277,7 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Trusted by Leading Algerian Banks
+              Trusted by Financial Institutions
             </h2>
           </div>
 
@@ -308,39 +311,39 @@ export default function Index() {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Flexible Pricing for Every Bank
+              Flexible Pricing Solutions
             </h2>
             <p className="text-xl text-muted-foreground">
-              Tiered pricing that scales with your customer base
+              Scalable pricing that grows with your institution
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
-                name: "Starter",
-                price: "1-2 DZD",
+                name: "Essential",
+                price: "From 1,500 DZD",
                 period: "per user/month",
-                features: ["Basic chatbot", "Standard support", "Core banking APIs", "Basic analytics"]
+                features: ["Basic platform access", "Standard support", "Core banking integration", "Basic reporting"]
               },
               {
                 name: "Professional",
-                price: "3-4 DZD",
+                price: "From 3,000 DZD",
                 period: "per user/month",
-                features: ["Advanced AI features", "Fraud detection", "Multilingual voice", "Premium analytics", "Priority support"],
+                features: ["Advanced features", "Fraud detection", "Multilingual support", "Advanced analytics", "Priority support"],
                 popular: true
               },
               {
                 name: "Enterprise",
                 price: "Custom",
                 period: "pricing",
-                features: ["On-premise deployment", "White-glove onboarding", "Custom integrations", "Dedicated support", "Compliance consulting"]
+                features: ["On-premise deployment", "Custom integrations", "Dedicated support", "Training & onboarding", "SLA guarantees"]
               }
             ].map((plan, index) => (
               <Card key={index} className={`border-border relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
+                    <Badge className="bg-primary text-primary-foreground">Recommended</Badge>
                   </div>
                 )}
                 <CardHeader className="text-center">
@@ -360,7 +363,7 @@ export default function Index() {
                     ))}
                   </ul>
                   <Button className="w-full mt-6" variant={plan.popular ? "default" : "outline"}>
-                    Get Started
+                    Contact Sales
                   </Button>
                 </CardContent>
               </Card>
@@ -373,21 +376,21 @@ export default function Index() {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Ready to Transform Your Banking Experience?
+            Ready to Modernize Your Banking Operations?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join leading Algerian banks that trust BankGenie AI to deliver exceptional customer service.
+            Join financial institutions across Algeria that trust BankGenie for their digital transformation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/kyc">
               <Button size="lg" className="h-12 px-8">
-                Start KYC Process
+                Start Implementation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/admin">
               <Button variant="outline" size="lg" className="h-12 px-8">
-                Admin Dashboard
+                View Demo
               </Button>
             </Link>
           </div>
@@ -403,18 +406,32 @@ export default function Index() {
                 <div className="h-6 w-6 bg-primary rounded flex items-center justify-center">
                   <MessageSquare className="h-4 w-4 text-primary-foreground" />
                 </div>
-                <span className="font-bold text-foreground">BankGenie AI</span>
+                <span className="font-bold text-foreground">BankGenie</span>
               </div>
-              <p className="text-muted-foreground">
-                Enterprise-grade conversational AI for the Algerian banking sector.
+              <p className="text-muted-foreground mb-4">
+                Enterprise banking platform for the Algerian financial sector.
               </p>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4" />
+                  <span>+213 XX XXX XXXX</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <Mail className="h-4 w-4" />
+                  <span>contact@bankgenie.dz</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <MapPin className="h-4 w-4" />
+                  <span>Algiers, Algeria</span>
+                </div>
+              </div>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Product</h4>
+              <h4 className="font-semibold text-foreground mb-4">Platform</h4>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Services</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Security</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Integrations</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
               </ul>
             </div>
@@ -423,22 +440,22 @@ export default function Index() {
               <ul className="space-y-2 text-muted-foreground">
                 <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Partners</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Support</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Legal</h4>
+              <h4 className="font-semibold text-foreground mb-4">Support</h4>
               <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">System Status</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Compliance</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Data Residency</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 BankGenie AI. All rights reserved. Built for the Algerian banking sector.</p>
+            <p>&copy; 2024 BankGenie. All rights reserved. Licensed banking technology provider.</p>
           </div>
         </div>
       </footer>
