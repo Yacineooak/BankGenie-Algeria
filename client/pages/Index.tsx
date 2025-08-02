@@ -33,6 +33,7 @@ import {
 
 export default function Index() {
   const [isVisible, setIsVisible] = useState(false);
+  const { language, setLanguage, isChanging, t } = useLanguage();
 
   useEffect(() => {
     setIsVisible(true);
