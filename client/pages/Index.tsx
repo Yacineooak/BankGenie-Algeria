@@ -181,22 +181,20 @@ export default function Index() {
           <div
             className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
-            <Badge variant="secondary" className="mb-4">
-              Enterprise Banking Platform • Built for Algeria
+            <Badge variant="secondary" className="mb-4 transition-all duration-300">
+              {t('enterprise_banking')}
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Modern Banking
-              <span className="text-primary block mt-2">Made Simple</span>
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight transition-all duration-500">
+              {t('modern_banking')}
+              <span className="text-primary block mt-2">{t('made_simple')}</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-              Comprehensive digital banking platform that modernizes customer
-              service operations with multilingual support, advanced security,
-              and seamless integration.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed transition-all duration-500">
+              {t('platform_description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/chat">
-                <Button size="lg" className="h-12 px-8">
-                  Try Platform
+                <Button size="lg" className="h-12 px-8 transition-all duration-200">
+                  {t('try_platform')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
