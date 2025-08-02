@@ -160,6 +160,7 @@ export default function Index() {
                   <option value="ar">🇩🇿 العربية</option>
                   <option value="fr">🇫🇷 Français</option>
                   <option value="dz">🇩🇿 الدارجة</option>
+                  <option value="en">🇺🇸 English</option>
                 </select>
               </div>
               <Link to="/login">
