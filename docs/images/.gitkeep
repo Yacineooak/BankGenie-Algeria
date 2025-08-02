@@ -1,0 +1,12 @@
+# Images Directory
+
+This directory contains screenshots and images for documentation.
+
+## Structure
+
+- `homepage/` - Homepage screenshots
+- `chatbot/` - Chatbot interface screenshots  
+- `admin/` - Admin dashboard screenshots
+- `loan-simulator/` - Loan calculator screenshots
+- `architecture/` - System architecture diagrams
+- `deployment/` - Deployment workflow diagrams
