@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export type Language = 'ar' | 'fr' | 'dz';
+export type Language = 'ar' | 'fr' | 'dz' | 'en';
 
 interface LanguageContextType {
   language: Language;
@@ -30,7 +30,7 @@ const translations: Translations = {
     dz: 'الأمان'
   },
   pricing: {
-    ar: 'الأس��ار',
+    ar: 'الأسعار',
     fr: 'Tarifs',
     dz: 'الأسعار'
   },
@@ -122,7 +122,7 @@ const translations: Translations = {
   },
   advanced_security_system: {
     ar: 'نظام أمان متقدم',
-    fr: 'Système de sécurité avancé',
+    fr: 'Système de s��curité avancé',
     dz: 'نظام أمان متقدم'
   },
   fraud_prevention_desc: {
