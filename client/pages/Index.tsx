@@ -199,8 +199,8 @@ export default function Index() {
                 </Button>
               </Link>
               <Link to="/loan-simulator">
-                <Button variant="outline" size="lg" className="h-12 px-8">
-                  Credit Calculator
+                <Button variant="outline" size="lg" className="h-12 px-8 transition-all duration-200">
+                  {t('credit_calculator')}
                 </Button>
               </Link>
             </div>
