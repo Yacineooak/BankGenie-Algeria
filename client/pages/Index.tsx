@@ -208,8 +208,8 @@ export default function Index() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+            {getStats().map((stat, index) => (
+              <div key={index} className="text-center transition-all duration-300">
                 <div className="text-3xl font-bold text-primary mb-2">
                   {stat.value}
                 </div>
