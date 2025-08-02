@@ -70,7 +70,7 @@ const translations: Translations = {
     en: 'Made Simple'
   },
   platform_description: {
-    ar: 'منصة مصرفية ��قمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
+    ar: 'منصة مصرفية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
     fr: 'Plateforme bancaire numérique complète qui modernise les opérations de service client avec support multilingue, sécurité avancée et intégration transparente.',
     dz: 'منصة بنكية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
     en: 'Comprehensive digital banking platform that modernizes customer service operations with multilingual support, advanced security, and seamless integration.'
@@ -134,10 +134,16 @@ const translations: Translations = {
     en: 'Digital Banking Assistant'
   },
   multilingual_support_desc: {
-    ar: 'دعم عملاء متعدد اللغات 24/7 بالعربية وا��فرنسية والدارجة والإنجليزية',
+    ar: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية والدارجة والإنجليزية',
     fr: 'Support client multilingue 24/7 en arabe, français, darija et anglais',
     dz: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية والدارجة والإنجليزية',
     en: '24/7 multilingual customer support in Arabic, French, Darija, and English'
+  },
+  language_changed_notification: {
+    ar: 'تم تغيير اللغة بنجاح',
+    fr: 'Langue changée avec succès',
+    dz: 'تبدلت اللغة بنجاح',
+    en: 'Language changed successfully'
   },
   advanced_security_system: {
     ar: 'نظام أمان متقدم',
