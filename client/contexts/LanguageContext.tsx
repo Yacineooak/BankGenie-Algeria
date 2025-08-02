@@ -22,113 +22,134 @@ const translations: Translations = {
   services: {
     ar: 'الخدمات',
     fr: 'Services',
-    dz: 'الخدمات'
+    dz: 'الخدمات',
+    en: 'Services'
   },
   security: {
     ar: 'الأمان',
     fr: 'Sécurité',
-    dz: 'الأمان'
+    dz: 'الأمان',
+    en: 'Security'
   },
   pricing: {
     ar: 'الأسعار',
     fr: 'Tarifs',
-    dz: 'الأسعار'
+    dz: 'الأسعار',
+    en: 'Pricing'
   },
   login: {
     ar: 'تسجيل الدخول',
     fr: 'Connexion',
-    dz: 'دخول'
+    dz: 'دخول',
+    en: 'Login'
   },
   get_started: {
     ar: 'ابدأ الآن',
     fr: 'Commencer',
-    dz: 'ابدأ الآن'
+    dz: 'ابدأ الآن',
+    en: 'Get Started'
   },
-  
+
   // Homepage
   enterprise_banking: {
     ar: 'منصة مصرفية متقدمة • مبنية للجزائر',
     fr: 'Plateforme bancaire avancée • Conçue pour l\'Algérie',
-    dz: 'منصة بنكية متقدمة • مصنوعة للجزائر'
+    dz: 'منصة بنكية متقدمة • مصنوعة للجزائر',
+    en: 'Enterprise Banking Platform • Built for Algeria'
   },
   modern_banking: {
     ar: 'الخدمات المصرفية الحديثة',
     fr: 'Services bancaires modernes',
-    dz: 'الخدمات البنكية العصرية'
+    dz: 'الخدمات البنكية العصرية',
+    en: 'Modern Banking'
   },
   made_simple: {
     ar: 'مبسطة ومتطورة',
     fr: 'Rendus simples',
-    dz: 'مبسطة ومتطورة'
+    dz: 'مبسطة ومتطورة',
+    en: 'Made Simple'
   },
   platform_description: {
-    ar: 'منصة مصرفية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
+    ar: 'منصة مصرفية رقمية شام��ة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
     fr: 'Plateforme bancaire numérique complète qui modernise les opérations de service client avec support multilingue, sécurité avancée et intégration transparente.',
-    dz: 'منصة بنكية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.'
+    dz: 'منصة بنكية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
+    en: 'Comprehensive digital banking platform that modernizes customer service operations with multilingual support, advanced security, and seamless integration.'
   },
   try_platform: {
     ar: 'جرب المنصة',
     fr: 'Essayer la plateforme',
-    dz: 'جرب المنصة'
+    dz: 'جرب المنصة',
+    en: 'Try Platform'
   },
   credit_calculator: {
     ar: 'حاسبة القروض',
     fr: 'Calculateur de crédit',
-    dz: 'حاسبة القروض'
+    dz: 'حاسبة القروض',
+    en: 'Credit Calculator'
   },
-  
+
   // Stats
   system_reliability: {
     ar: 'موثوقية النظام',
     fr: 'Fiabilité du système',
-    dz: 'موثوقية النظام'
+    dz: 'موثوقية النظام',
+    en: 'System Reliability'
   },
   service_availability: {
     ar: 'توفر الخدمة',
     fr: 'Disponibilité du service',
-    dz: 'توفر الخدمة'
+    dz: 'توفر الخدمة',
+    en: 'Service Availability'
   },
   language_support: {
     ar: 'دعم اللغات',
     fr: 'Support linguistique',
-    dz: 'دعم اللغات'
+    dz: 'دعم اللغات',
+    en: 'Language Support'
   },
   security_standards: {
     ar: 'معايير الأمان المصرفي',
     fr: 'Normes de sécurité bancaire',
-    dz: 'معايير الأمان البنكي'
+    dz: 'معايير الأمان البنكي',
+    en: 'Security Standards'
   },
-  
+
   // Features
   complete_banking_solution: {
     ar: 'حل مصرفي متكامل',
     fr: 'Solution bancaire complète',
-    dz: 'حل بنكي متكامل'
+    dz: 'حل بنكي متكامل',
+    en: 'Complete Banking Solution'
   },
   everything_description: {
     ar: 'كل ما تحتاجه مؤسستك المالية لتقديم خدمة عملاء استثنائية',
     fr: 'Tout ce dont votre institution financière a besoin pour offrir un service client exceptionnel',
-    dz: 'كل ما تحتاجه مؤسستك المالية لتقديم خدمة عملاء استثنائية'
+    dz: 'كل ما تحتاجه مؤسستك المالية لتقديم خدمة عملاء استثنائية',
+    en: 'Everything your financial institution needs to deliver exceptional customer service'
   },
   digital_banking_assistant: {
     ar: 'مساعد مصرفي ذكي',
     fr: 'Assistant bancaire numérique',
-    dz: 'مساعد بنكي ذكي'
+    dz: 'مساعد بنكي ذكي',
+    en: 'Digital Banking Assistant'
   },
   multilingual_support_desc: {
-    ar: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية والدارجة',
-    fr: 'Support client multilingue 24/7 en arabe, français et darija',
-    dz: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية والدارجة'
+    ar: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية و��لدارجة والإنجليزية',
+    fr: 'Support client multilingue 24/7 en arabe, français, darija et anglais',
+    dz: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية والدارجة والإنجليزية',
+    en: '24/7 multilingual customer support in Arabic, French, Darija, and English'
   },
   advanced_security_system: {
     ar: 'نظام أمان متقدم',
-    fr: 'Système de s��curité avancé',
-    dz: 'نظام أمان متقدم'
+    fr: 'Système de sécurité avancé',
+    dz: 'نظام أمان متقدم',
+    en: 'Advanced Security System'
   },
   fraud_prevention_desc: {
     ar: 'منع الاحتيال في الوقت الفعلي ومراقبة المعاملات',
     fr: 'Prévention de la fraude en temps réel et surveillance des transactions',
-    dz: 'منع الاحتيال في الوقت الحقيقي ومراقبة المعاملات'
+    dz: 'منع الاحتيال في الوقت الحقيقي ومراقبة المعاملات',
+    en: 'Real-time fraud prevention and transaction monitoring'
   }
 };
 
