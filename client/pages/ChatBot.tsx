@@ -114,7 +114,7 @@ export default function ChatBot() {
       dz: "مرحبا، كيفاش نقدر نعاونك في خدماتك البنكية اليوم؟"
     },
     balance_success: {
-      ar: "تم استرجاع رصيد حسابك بنجاح. إليك التفاصيل:",
+      ar: "تم استرجاع رصيد حسا��ك بنجاح. إليك التفاصيل:",
       fr: "Votre solde a été récupéré avec succès. Voici les détails:",
       dz: "تم جلب رصيد حسابك بنجاح. هاذي التفاصيل:"
     },
@@ -450,7 +450,7 @@ export default function ChatBot() {
         en: 'Live Data'
       },
       typing: {
-        ar: 'ج��ري الكتابة...',
+        ar: 'جاري الكتابة...',
         fr: 'En train d\'écrire...',
         dz: 'راه يكتب...',
         en: 'Typing...'
@@ -543,7 +543,7 @@ export default function ChatBot() {
     const welcomeTexts = {
       ar: 'أهلاً وسهلاً بك في بنك جيني الذكي\n\nأنا مساعدك المصرفي الذكي، متصل مباشرة بالنظام المصرفي الجزائري لتقديم خدمات فورية ودقيقة.\n\nيمكنني مساعدتك في:\n• الاستعلام عن أرصدة حساباتك\n• عرض تاريخ العمليات المصرفية\n• متابعة أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات البطاقات المصرفية\n• معلومات الفروع والصرافات\n\nكيف يمكنني خدمتك اليوم؟',
       fr: 'Bienvenue dans BankGenie Intelligent\n\nJe suis votre assistant bancaire intelligent, connecté directement au système bancaire algérien pour fournir des services instantanés et précis.\n\nJe peux vous aider avec:\n• Consultation des soldes de vos comptes\n• Affichage de l\'historique des transactions\n• Suivi des taux de change\n• Simulation de crédits et calcul d\'échéances\n• Services de cartes bancaires\n• Informations sur les agences et distributeurs\n\nComment puis-je vous aider aujourd\'hui?',
-      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة با��نظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟',
+      dz: 'مرحبا بيك في بنك جيني الذكي\n\nراني مساعدك البنكي الذكي، متصل مباشرة بالنظام البنكي الجزائري باش نقدم خدمات فورية ودقيقة.\n\nنقدر نعاونك في:\n• الاستعلام على رصيد حساباتك\n• شوف تاريخ العمليات البنكية\n• تابع أسعار صرف العملات\n• محاكاة القروض وحساب الأقساط\n• خدمات الكارطات البنكية\n• معلومات الفروع والصرافات\n\nكيفاش نقدر نخدمك اليوم؟',
       en: 'Welcome to BankGenie Intelligent\n\nI am your intelligent banking assistant, directly connected to the Algerian banking system to provide instant and accurate services.\n\nI can help you with:\n• Account balance inquiries\n• Transaction history display\n• Currency exchange rates tracking\n• Credit simulation and installment calculation\n• Banking card services\n• Branch and ATM information\n\nHow can I serve you today?'
     };
 
@@ -613,28 +613,28 @@ export default function ChatBot() {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-2">
-                <Languages className={`h-4 w-4 text-white/80 transition-transform duration-300 ${
-                  isLanguageChanging ? 'rotate-180 scale-110' : ''
+              <div className="flex items-center space-x-2 bg-white/10 rounded-lg px-3 py-2 backdrop-blur-sm hover:bg-white/20 transition-all duration-300">
+                <Languages className={`h-4 w-4 text-white/80 transition-all duration-300 ${
+                  isLanguageChanging ? 'rotate-180 scale-110 text-white' : 'hover:text-white'
                 }`} />
                 <div className="relative">
                   <select
                     value={selectedLanguage}
                     onChange={(e) => handleLanguageChange(e.target.value as any)}
                     disabled={isLanguageChanging}
-                    className={`bg-white/20 border border-white/30 rounded-md px-2 py-1 text-white text-sm backdrop-blur-sm transition-all duration-300 ${
-                      isLanguageChanging ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/30'
+                    className={`bg-transparent border-0 text-white text-sm font-medium focus:outline-none transition-all duration-300 ${
+                      isLanguageChanging ? 'opacity-50 cursor-not-allowed' : 'hover:text-white/90 cursor-pointer'
                     }`}
                   >
                     {Object.entries(languages).map(([code, lang]) => (
-                      <option key={code} value={code} className="text-gray-900 bg-white">
+                      <option key={code} value={code} className="text-gray-900 bg-white font-medium">
                         {lang.flag} {lang.name}
                       </option>
                     ))}
                   </select>
                   {isLanguageChanging && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <Loader2 className="h-3 w-3 animate-spin text-white" />
+                      <div className="h-3 w-3 animate-spin border border-white border-t-transparent rounded-full"></div>
                     </div>
                   )}
                 </div>
@@ -834,7 +834,7 @@ export default function ChatBot() {
                 setInputText(queries[selectedLanguage]);
               }} className="rounded-full transition-all duration-200">
                 <FileText className="h-3 w-3 mr-1" />
-                {selectedLanguage === 'ar' ? 'العملي��ت' :
+                {selectedLanguage === 'ar' ? 'العمليات' :
                  selectedLanguage === 'fr' ? 'Transactions' :
                  selectedLanguage === 'dz' ? 'العمليات' : 'Transactions'}
               </Button>
@@ -929,7 +929,7 @@ export default function ChatBot() {
                 <div className="flex space-x-2">
                   <Button variant="outline" size="sm" className="border-blue-300 text-blue-700 hover:bg-blue-100">
                     <MessageCircle className="h-3 w-3 mr-1" />
-                    دردشة
+                    درد��ة
                   </Button>
                 </div>
               </div>
