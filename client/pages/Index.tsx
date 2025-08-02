@@ -145,23 +145,26 @@ export default function Index() {
               >
                 {t('pricing')}
               </a>
-              <div className="flex items-center space-x-2">
-                <Languages className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${
-                  isChanging ? 'rotate-180 scale-110' : ''
+              <div className="flex items-center space-x-2 bg-muted/30 rounded-lg px-3 py-2 hover:bg-muted/50 transition-all duration-300">
+                <Languages className={`h-4 w-4 text-muted-foreground transition-all duration-300 ${
+                  isChanging ? 'rotate-180 scale-110 text-primary' : 'hover:text-primary'
                 }`} />
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value as any)}
                   disabled={isChanging}
-                  className={`bg-background border border-border rounded-md px-2 py-1 text-sm transition-all duration-300 ${
-                    isChanging ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary'
+                  className={`bg-transparent border-0 text-sm font-medium focus:outline-none transition-all duration-300 ${
+                    isChanging ? 'opacity-50 cursor-not-allowed' : 'hover:text-primary cursor-pointer'
                   }`}
                 >
-                  <option value="ar">🇩🇿 العربية</option>
-                  <option value="fr">🇫🇷 Français</option>
-                  <option value="dz">🇩🇿 الدارجة</option>
-                  <option value="en">🇺🇸 English</option>
+                  <option value="ar" className="bg-background text-foreground">🇩🇿 العربية</option>
+                  <option value="fr" className="bg-background text-foreground">🇫🇷 Français</option>
+                  <option value="dz" className="bg-background text-foreground">🇩🇿 الدارجة</option>
+                  <option value="en" className="bg-background text-foreground">🇺🇸 English</option>
                 </select>
+                {isChanging && (
+                  <div className="h-3 w-3 animate-spin border border-primary border-t-transparent rounded-full"></div>
+                )}
               </div>
               <Link to="/login">
                 <Button variant="outline" size="sm">
