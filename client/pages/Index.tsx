@@ -131,27 +131,44 @@ export default function Index() {
                 href="#features"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Services
+                {t('services')}
               </a>
               <a
                 href="#security"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Security
+                {t('security')}
               </a>
               <a
                 href="#pricing"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Pricing
+                {t('pricing')}
               </a>
+              <div className="flex items-center space-x-2">
+                <Languages className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${
+                  isChanging ? 'rotate-180 scale-110' : ''
+                }`} />
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value as any)}
+                  disabled={isChanging}
+                  className={`bg-background border border-border rounded-md px-2 py-1 text-sm transition-all duration-300 ${
+                    isChanging ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary'
+                  }`}
+                >
+                  <option value="ar">🇩🇿 العربية</option>
+                  <option value="fr">🇫🇷 Français</option>
+                  <option value="dz">🇩🇿 الدارجة</option>
+                </select>
+              </div>
               <Link to="/login">
                 <Button variant="outline" size="sm">
-                  Login
+                  {t('login')}
                 </Button>
               </Link>
               <Link to="/chat">
-                <Button size="sm">Get Started</Button>
+                <Button size="sm">{t('get_started')}</Button>
               </Link>
             </div>
           </div>
