@@ -70,7 +70,7 @@ const translations: Translations = {
     en: 'Made Simple'
   },
   platform_description: {
-    ar: 'منصة مصرفية رقمية شام��ة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
+    ar: 'منصة مصرفية ��قمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
     fr: 'Plateforme bancaire numérique complète qui modernise les opérations de service client avec support multilingue, sécurité avancée et intégration transparente.',
     dz: 'منصة بنكية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.',
     en: 'Comprehensive digital banking platform that modernizes customer service operations with multilingual support, advanced security, and seamless integration.'
@@ -134,7 +134,7 @@ const translations: Translations = {
     en: 'Digital Banking Assistant'
   },
   multilingual_support_desc: {
-    ar: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية و��لدارجة والإنجليزية',
+    ar: 'دعم عملاء متعدد اللغات 24/7 بالعربية وا��فرنسية والدارجة والإنجليزية',
     fr: 'Support client multilingue 24/7 en arabe, français, darija et anglais',
     dz: 'دعم عملاء متعدد اللغات 24/7 بالعربية والفرنسية والدارجة والإنجليزية',
     en: '24/7 multilingual customer support in Arabic, French, Darija, and English'
@@ -182,7 +182,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Load language from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem('bankgenie_language') as Language;
-    if (saved && ['ar', 'fr', 'dz'].includes(saved)) {
+    if (saved && ['ar', 'fr', 'dz', 'en'].includes(saved)) {
       setLanguageState(saved);
     }
   }, []);
@@ -191,7 +191,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const isRTL = language === 'ar' || language === 'dz';
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-    document.documentElement.lang = language === 'ar' ? 'ar' : language === 'fr' ? 'fr' : 'ar-DZ';
+
+    const langMap = {
+      ar: 'ar',
+      fr: 'fr',
+      dz: 'ar-DZ',
+      en: 'en'
+    };
+    document.documentElement.lang = langMap[language];
   }, [language]);
 
   return (
