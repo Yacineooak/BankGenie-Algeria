@@ -114,9 +114,9 @@ export default function ChatBot() {
       dz: "مرحبا، كيفاش نقدر نعاونك في خدماتك البنكية اليوم؟"
     },
     balance_success: {
-      ar: "تم استرجاع رصيد حسا��ك بنجاح. إليك التفاصيل:",
+      ar: "تم استرجاع رصيد حسابك بنجاح. إليك التفاصيل:",
       fr: "Votre solde a été récupéré avec succès. Voici les détails:",
-      dz: "تم جلب رصيد حسابك بنجاح. هاذي التفاصيل:"
+      dz: "ت�� جلب رصيد حسابك بنجاح. هاذي التفاصيل:"
     },
     error_professional: {
       ar: "نعتذر لحدوث خطأ تقني. فريق الدعم الفني يعمل على حل المشكلة. يمكنك المحاولة مرة أخرى أو التواصل معنا.",
@@ -440,7 +440,7 @@ export default function ChatBot() {
       connected_live: {
         ar: 'متصل مباشرة',
         fr: 'Connecté en direct',
-        dz: 'متصل مباشرة',
+        dz: 'متصل م��اشرة',
         en: 'Connected Live'
       },
       live_data: {
@@ -491,22 +491,27 @@ export default function ChatBot() {
     setMessages(prev => [...prev, errorMessage]);
   };
 
-  const detectLanguage = (text: string): 'ar' | 'fr' | 'dz' => {
+  const detectLanguage = (text: string): 'ar' | 'fr' | 'dz' | 'en' => {
     const arabicPattern = /[\u0600-\u06FF]/;
     const frenchPattern = /[àâäçéèêëïîôùûüÿ]/i;
-    
+    const englishPattern = /\b(the|and|or|is|are|was|were|have|has|had|will|would|could|should|can|may|might|must|shall|do|does|did|get|got|make|made|take|took|come|came|go|went|see|saw|know|knew|think|thought|say|said|tell|told|give|gave|find|found|work|worked|call|called|try|tried|ask|asked|need|needed|feel|felt|become|became|leave|left|put|put|mean|meant|keep|kept|let|let|begin|began|seem|seemed|help|helped|talk|talked|turn|turned|start|started|show|showed|hear|heard|play|played|run|ran|move|moved|live|lived|believe|believed|hold|held|bring|brought|happen|happened|write|wrote|provide|provided|sit|sat|stand|stood|lose|lost|pay|paid|meet|met|include|included|continue|continued|set|set|learn|learned|change|changed|lead|led|understand|understood|watch|watched|follow|followed|stop|stopped|create|created|speak|spoke|read|read|allow|allowed|add|added|spend|spent|grow|grew|open|opened|walk|walked|win|won|offer|offered|remember|remembered|love|loved|consider|considered|appear|appeared|buy|bought|wait|waited|serve|served|die|died|send|sent|expect|expected|build|built|stay|stayed|fall|fell|cut|cut|reach|reached|kill|killed|remain|remained|suggest|suggested|raise|raised|pass|passed|sell|sold|require|required|report|reported|decide|decided|pull|pulled)\b/i;
+
     if (arabicPattern.test(text)) {
-      const darija_patterns = ['راني', 'كيفاش', 'وين', 'شنو', 'بصح', 'يعني', 'برك'];
+      const darija_patterns = ['راني', 'كيفاش', 'وين', 'شنو', 'بصح', 'يعني', 'برك', 'كيما', 'بلاصة', 'حاجة', 'واعر', 'ملير'];
       for (const pattern of darija_patterns) {
         if (text.includes(pattern)) return 'dz';
       }
       return 'ar';
     }
-    
-    if (frenchPattern.test(text) || /\b(le|la|les|un|une|des|je|tu|il|elle|nous|vous|ils|elles)\b/i.test(text)) {
+
+    if (frenchPattern.test(text) || /\b(le|la|les|un|une|des|je|tu|il|elle|nous|vous|ils|elles|bonjour|merci|s'il|vous|plaît|comment|ça|va|très|bien|pour|avec|dans|sur|par|de|du|des|à|au|aux)\b/i.test(text)) {
       return 'fr';
     }
-    
+
+    if (englishPattern.test(text)) {
+      return 'en';
+    }
+
     return selectedLanguage;
   };
 
@@ -929,7 +934,7 @@ export default function ChatBot() {
                 <div className="flex space-x-2">
                   <Button variant="outline" size="sm" className="border-blue-300 text-blue-700 hover:bg-blue-100">
                     <MessageCircle className="h-3 w-3 mr-1" />
-                    درد��ة
+                    دردشة
                   </Button>
                 </div>
               </div>
