@@ -150,6 +150,25 @@
   }
 }
 
+@layer utilities {
+  .text-arabic {
+    font-family: 'Noto Sans Arabic', 'Segoe UI', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    unicode-bidi: embed;
+  }
+
+  .text-ar-enhanced {
+    font-family: 'Noto Sans Arabic', 'Segoe UI', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-variant-ligatures: common-ligatures;
+    text-rendering: optimizeLegibility;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    word-spacing: 0.1em;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
