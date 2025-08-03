@@ -249,11 +249,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, isChanging, t }}>
-      <div
-        className={`transition-all duration-300 ${isChanging ? "opacity-90" : "opacity-100"}`}
-      >
-        {children}
-      </div>
+      {children}
     </LanguageContext.Provider>
   );
 }
