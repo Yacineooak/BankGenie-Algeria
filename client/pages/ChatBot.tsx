@@ -791,7 +791,9 @@ export default function ChatBot() {
                         <div
                           className={`rounded-2xl px-4 py-3 shadow-sm ${getMessageStyle(message)}`}
                         >
-                          <p className="text-sm whitespace-pre-line leading-relaxed">
+                          <p className={`text-sm whitespace-pre-line leading-relaxed ${
+                            (selectedLanguage === 'ar' || selectedLanguage === 'dz') ? 'font-arabic' : ''
+                          }`}>
                             {message.text}
                           </p>
                         </div>
