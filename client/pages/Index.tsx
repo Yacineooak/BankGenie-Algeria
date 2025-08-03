@@ -246,7 +246,9 @@ export default function Index() {
                 <div className="text-3xl font-bold text-primary mb-2">
                   {stat.value}
                 </div>
-                <div className="text-muted-foreground">{stat.label}</div>
+                <div className={`text-muted-foreground ${
+                  (language === 'ar' || language === 'dz') ? 'text-ar-enhanced' : ''
+                }`}>{stat.label}</div>
               </div>
             ))}
           </div>
