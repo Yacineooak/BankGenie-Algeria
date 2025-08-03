@@ -13,6 +13,23 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: [
+          'Noto Sans',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'sans-serif'
+        ],
+        arabic: [
+          'Noto Sans Arabic',
+          'Segoe UI',
+          'Tahoma',
+          'Arial Unicode MS',
+          'sans-serif'
+        ]
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
