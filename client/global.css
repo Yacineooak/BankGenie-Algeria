@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700;800&display=swap&subset=arabic,latin');
+
+/* Preload critical Arabic fonts */
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-display: swap;
+  font-weight: 400;
+  src: local('Noto Sans Arabic'), local('NotoSansArabic-Regular');
+}
 
 @tailwind base;
 @tailwind components;
