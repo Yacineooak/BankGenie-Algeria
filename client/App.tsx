@@ -20,27 +20,31 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/chat" element={<ChatBot />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/loan-simulator" element={<LoanSimulator />} />
-            <Route path="/kyc" element={<KYC />} />
-            <Route path="/fraud-monitoring" element={<FraudMonitoring />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
-  </QueryClientProvider>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/chat" element={<ChatBot />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/loan-simulator" element={<LoanSimulator />} />
+                <Route path="/kyc" element={<KYC />} />
+                <Route path="/fraud-monitoring" element={<FraudMonitoring />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </LanguageProvider>
+      </ErrorBoundary>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 const rootElement = document.getElementById("root")!;
