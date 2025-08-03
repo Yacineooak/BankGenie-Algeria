@@ -89,10 +89,10 @@ export default function Index() {
   ];
 
   const getStats = () => [
-    { value: "99.9%", label: t('system_reliability') },
-    { value: "24/7", label: t('service_availability') },
-    { value: "4", label: t('language_support') },
-    { value: "Bank-Grade", label: t('security_standards') },
+    { value: "99.9%", label: t("system_reliability") },
+    { value: "24/7", label: t("service_availability") },
+    { value: "4", label: t("language_support") },
+    { value: "Bank-Grade", label: t("security_standards") },
   ];
 
   const testimonials = [
@@ -131,36 +131,50 @@ export default function Index() {
                 href="#features"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                {t('services')}
+                {t("services")}
               </a>
               <a
                 href="#security"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                {t('security')}
+                {t("security")}
               </a>
               <a
                 href="#pricing"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                {t('pricing')}
+                {t("pricing")}
               </a>
               <div className="flex items-center space-x-2 bg-muted/30 rounded-lg px-3 py-2 hover:bg-muted/50 transition-all duration-300">
-                <Languages className={`h-4 w-4 text-muted-foreground transition-all duration-300 ${
-                  isChanging ? 'rotate-180 scale-110 text-primary' : 'hover:text-primary'
-                }`} />
+                <Languages
+                  className={`h-4 w-4 text-muted-foreground transition-all duration-300 ${
+                    isChanging
+                      ? "rotate-180 scale-110 text-primary"
+                      : "hover:text-primary"
+                  }`}
+                />
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value as any)}
                   disabled={isChanging}
                   className={`bg-transparent border-0 text-sm font-medium focus:outline-none transition-all duration-300 ${
-                    isChanging ? 'opacity-50 cursor-not-allowed' : 'hover:text-primary cursor-pointer'
+                    isChanging
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-primary cursor-pointer"
                   }`}
                 >
-                  <option value="ar" className="bg-background text-foreground">🇩🇿 العربية</option>
-                  <option value="fr" className="bg-background text-foreground">🇫🇷 Français</option>
-                  <option value="dz" className="bg-background text-foreground">🇩🇿 الدارجة</option>
-                  <option value="en" className="bg-background text-foreground">🇺🇸 English</option>
+                  <option value="ar" className="bg-background text-foreground">
+                    🇩🇿 العربية
+                  </option>
+                  <option value="fr" className="bg-background text-foreground">
+                    🇫🇷 Français
+                  </option>
+                  <option value="dz" className="bg-background text-foreground">
+                    🇩🇿 الدارجة
+                  </option>
+                  <option value="en" className="bg-background text-foreground">
+                    🇺🇸 English
+                  </option>
                 </select>
                 {isChanging && (
                   <div className="h-3 w-3 animate-spin border border-primary border-t-transparent rounded-full"></div>
@@ -168,11 +182,11 @@ export default function Index() {
               </div>
               <Link to="/login">
                 <Button variant="outline" size="sm">
-                  {t('login')}
+                  {t("login")}
                 </Button>
               </Link>
               <Link to="/chat">
-                <Button size="sm">{t('get_started')}</Button>
+                <Button size="sm">{t("get_started")}</Button>
               </Link>
             </div>
           </div>
@@ -185,26 +199,38 @@ export default function Index() {
           <div
             className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
-            <Badge variant="secondary" className="mb-4 transition-all duration-300">
-              {t('enterprise_banking')}
+            <Badge
+              variant="secondary"
+              className="mb-4 transition-all duration-300"
+            >
+              {t("enterprise_banking")}
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight transition-all duration-500">
-              {t('modern_banking')}
-              <span className="text-primary block mt-2">{t('made_simple')}</span>
+              {t("modern_banking")}
+              <span className="text-primary block mt-2">
+                {t("made_simple")}
+              </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed transition-all duration-500">
-              {t('platform_description')}
+              {t("platform_description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/chat">
-                <Button size="lg" className="h-12 px-8 transition-all duration-200">
-                  {t('try_platform')}
+                <Button
+                  size="lg"
+                  className="h-12 px-8 transition-all duration-200"
+                >
+                  {t("try_platform")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link to="/loan-simulator">
-                <Button variant="outline" size="lg" className="h-12 px-8 transition-all duration-200">
-                  {t('credit_calculator')}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="h-12 px-8 transition-all duration-200"
+                >
+                  {t("credit_calculator")}
                 </Button>
               </Link>
             </div>
@@ -213,7 +239,10 @@ export default function Index() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
             {getStats().map((stat, index) => (
-              <div key={index} className="text-center transition-all duration-300">
+              <div
+                key={index}
+                className="text-center transition-all duration-300"
+              >
                 <div className="text-3xl font-bold text-primary mb-2">
                   {stat.value}
                 </div>
