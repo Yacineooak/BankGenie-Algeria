@@ -50,10 +50,21 @@ const App = () => (
 const rootElement = document.getElementById("root")!;
 
 // Prevent double mounting during hot reload
-if (!(rootElement as any)._reactRoot) {
-  const root = createRoot(rootElement);
-  (rootElement as any)._reactRoot = root;
+let root = (rootElement as any)._reactRoot;
+
+if (!root) {
+  try {
+    root = createRoot(rootElement);
+    (rootElement as any)._reactRoot = root;
+  } catch (error) {
+    console.warn("Root creation warning:", error);
+    // If createRoot fails, try to get existing root
+    root = (rootElement as any)._reactRoot;
+  }
+}
+
+if (root) {
   root.render(<App />);
 } else {
-  (rootElement as any)._reactRoot.render(<App />);
+  console.error("Failed to create or find React root");
 }
