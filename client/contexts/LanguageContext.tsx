@@ -104,7 +104,7 @@ const translations: Translations = {
     en: "System Reliability",
   },
   service_availability: {
-    ar: "توفر الخدمة",
+    ar: "��وفر الخدمة",
     fr: "Disponibilité du service",
     dz: "توفر الخدمة",
     en: "Service Availability",
@@ -176,17 +176,27 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
     setIsChanging(true);
 
-    // Brief pause for visual feedback
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    try {
+      // Brief pause for visual feedback
+      await new Promise((resolve) => setTimeout(resolve, 200));
 
-    setLanguageState(newLanguage);
+      setLanguageState(newLanguage);
 
-    // Store in localStorage
-    localStorage.setItem("bankgenie_language", newLanguage);
+      // Store in localStorage safely
+      try {
+        localStorage.setItem("bankgenie_language", newLanguage);
+      } catch (error) {
+        console.warn("Could not save language preference:", error);
+      }
 
-    setTimeout(() => {
+      // Reset loading state
+      setTimeout(() => {
+        setIsChanging(false);
+      }, 300);
+    } catch (error) {
+      console.error("Language change error:", error);
       setIsChanging(false);
-    }, 300);
+    }
   };
 
   const t = (key: string): string => {
