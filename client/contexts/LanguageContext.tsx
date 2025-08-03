@@ -42,7 +42,7 @@ const translations: Translations = {
   pricing: {
     ar: "الأسعار",
     fr: "Tarifs",
-    dz: "الأسعار",
+    dz: "الأس��ار",
     en: "Pricing",
   },
   login: {
@@ -104,7 +104,7 @@ const translations: Translations = {
     en: "System Reliability",
   },
   service_availability: {
-    ar: "��وفر الخدمة",
+    ar: "توفر الخدمة",
     fr: "Disponibilité du service",
     dz: "توفر الخدمة",
     en: "Service Availability",
@@ -205,9 +205,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Load language from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("bankgenie_language") as Language;
-    if (saved && ["ar", "fr", "dz", "en"].includes(saved)) {
-      setLanguageState(saved);
+    try {
+      const saved = localStorage.getItem("bankgenie_language") as Language;
+      if (saved && ["ar", "fr", "dz", "en"].includes(saved)) {
+        setLanguageState(saved);
+      }
+    } catch (error) {
+      console.warn("Could not load language preference:", error);
+      // Default to Arabic if localStorage fails
+      setLanguageState("ar");
     }
   }, []);
 
