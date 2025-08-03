@@ -79,7 +79,7 @@ const translations: Translations = {
   },
   platform_description: {
     ar: "منصة مصرفية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.",
-    fr: "Plateforme bancaire numérique complète qui modernise les opérations de service client avec support multilingue, sécurité avancée et intégration transparente.",
+    fr: "Plateforme bancaire numérique complète qui modernise les opérations de service client avec support multilingue, s��curité avancée et intégration transparente.",
     dz: "منصة بنكية رقمية شاملة تحدث عمليات خدمة العملاء بدعم متعدد اللغات وأمان متقدم وتكامل سلس.",
     en: "Comprehensive digital banking platform that modernizes customer service operations with multilingual support, advanced security, and seamless integration.",
   },
@@ -116,7 +116,7 @@ const translations: Translations = {
     en: "Language Support",
   },
   security_standards: {
-    ar: "معايير الأمان المصرفي",
+    ar: "معايير الأمان الم��رفي",
     fr: "Normes de sécurité bancaire",
     dz: "معايير الأمان البنكي",
     en: "Security Standards",
@@ -257,6 +257,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
+    // Provide fallback instead of throwing during development hot reload
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('useLanguage hook used outside LanguageProvider, using fallback');
+      return {
+        language: 'ar' as Language,
+        setLanguage: () => Promise.resolve(),
+        isChanging: false,
+        t: (key: string) => key
+      };
+    }
     throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
