@@ -201,18 +201,34 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Update document direction based on language
+  // Update document direction based on language (safely)
   useEffect(() => {
-    const isRTL = language === "ar" || language === "dz";
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    // Use requestAnimationFrame to avoid conflicts with React's reconciliation
+    const updateDocument = () => {
+      try {
+        const isRTL = language === "ar" || language === "dz";
+        if (document.documentElement.dir !== (isRTL ? "rtl" : "ltr")) {
+          document.documentElement.dir = isRTL ? "rtl" : "ltr";
+        }
 
-    const langMap = {
-      ar: "ar",
-      fr: "fr",
-      dz: "ar-DZ",
-      en: "en",
+        const langMap = {
+          ar: "ar",
+          fr: "fr",
+          dz: "ar-DZ",
+          en: "en",
+        };
+
+        const newLang = langMap[language];
+        if (document.documentElement.lang !== newLang) {
+          document.documentElement.lang = newLang;
+        }
+      } catch (error) {
+        // Silently handle any DOM manipulation errors
+        console.warn("Language context DOM update warning:", error);
+      }
     };
-    document.documentElement.lang = langMap[language];
+
+    requestAnimationFrame(updateDocument);
   }, [language]);
 
   return (
