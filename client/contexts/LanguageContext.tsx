@@ -116,7 +116,7 @@ const translations: Translations = {
     en: "Language Support",
   },
   security_standards: {
-    ar: "معايير الأمان الم��رفي",
+    ar: "معايير الأمان المصرفي",
     fr: "Normes de sécurité bancaire",
     dz: "معايير الأمان البنكي",
     en: "Security Standards",
