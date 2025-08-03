@@ -42,7 +42,15 @@
   }
 
   /* Ensure proper Arabic character support */
+  body[dir="rtl"],
+  body[lang="ar"],
+  body[lang="ar-DZ"],
   [dir="rtl"] * {
+    font-family: 'Noto Sans Arabic', 'Segoe UI', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
+  }
+
+  /* Force Arabic font for specific Arabic text */
+  [lang="ar"], [lang="ar-DZ"] {
     font-family: 'Noto Sans Arabic', 'Segoe UI', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
   }
 
