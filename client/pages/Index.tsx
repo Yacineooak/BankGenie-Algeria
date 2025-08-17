@@ -267,19 +267,28 @@ export default function Index() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+          {/* Premium Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
             {getStats().map((stat, index) => (
               <div
                 key={index}
-                className="text-center transition-all duration-300"
+                className="card-3d glass-effect p-8 rounded-2xl text-center group hover:scale-105 transition-all duration-300"
+                style={{animationDelay: `${index * 200}ms`}}
               >
-                <div className="text-3xl font-bold text-primary mb-2">
+                <div className="text-5xl md:text-6xl font-bold text-white stats-glow mb-4 group-hover:scale-110 transition-all duration-300">
                   {stat.value}
                 </div>
-                <div className={`text-muted-foreground ${
+                <div className={`text-white/80 text-sm font-medium ${
                   (language === 'ar' || language === 'dz') ? 'text-ar-enhanced' : ''
                 }`}>{stat.label}</div>
+
+                {/* Decorative Icons */}
+                <div className="absolute top-4 right-4 text-2xl opacity-20">
+                  {index === 0 && '⚡'}
+                  {index === 1 && '🌍'}
+                  {index === 2 && '🗣️'}
+                  {index === 3 && '🛡️'}
+                </div>
               </div>
             ))}
           </div>
