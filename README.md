@@ -17,6 +17,7 @@
 </div>
 
 ---
+<img width="1900" height="950" alt="iugvvgcvgv" src="https://github.com/user-attachments/assets/d5ccc6f6-c372-460d-be17-268b1f8e679b" />
 
 ## 🎯 Mission
 
