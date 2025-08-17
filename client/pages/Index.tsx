@@ -193,46 +193,77 @@ export default function Index() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
+      {/* Premium Hero Section */}
+      <section className="relative py-32 px-4 gradient-bg-banking overflow-hidden">
+        <div className="absolute inset-0 hero-gradient"></div>
+        <div className="absolute inset-0 floating-elements"></div>
+
+        {/* Floating Money Elements */}
+        <div className="absolute top-20 left-10 text-6xl opacity-10 money-float">💰</div>
+        <div className="absolute top-40 right-20 text-5xl opacity-10 money-float" style={{animationDelay: '2s'}}>💎</div>
+        <div className="absolute bottom-40 left-1/4 text-4xl opacity-10 money-float" style={{animationDelay: '4s'}}>🏦</div>
+        <div className="absolute top-60 right-1/3 text-5xl opacity-10 money-float" style={{animationDelay: '1s'}}>💳</div>
+        <div className="absolute bottom-60 right-10 text-4xl opacity-10 money-float" style={{animationDelay: '3s'}}>📈</div>
+
+        <div className="container mx-auto text-center relative z-10">
           <div
             className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
             <Badge
               variant="secondary"
-              className="mb-4 transition-all duration-300"
+              className="mb-6 px-6 py-2 text-sm font-semibold glass-effect border-0 text-white transition-all duration-300 hover:scale-105"
             >
-              {t("enterprise_banking")}
+              ✨ {t("enterprise_banking")}
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight transition-all duration-500">
-              {t("modern_banking")}
-              <span className="text-primary block mt-2">
+            <h1 className="text-5xl md:text-8xl font-bold mb-8 leading-tight transition-all duration-500">
+              <span className="text-white drop-shadow-lg">
+                {t("modern_banking")}
+              </span>
+              <span className="gradient-text block mt-4 text-6xl md:text-9xl">
                 {t("made_simple")}
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed transition-all duration-500">
+            <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed transition-all duration-500 drop-shadow-sm">
               {t("platform_description")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link to="/chat">
                 <Button
                   size="lg"
-                  className="h-12 px-8 transition-all duration-200"
+                  className="h-16 px-12 text-lg font-semibold premium-button border-0 text-white hover:text-white"
                 >
+                  <Zap className="mr-3 h-5 w-5" />
                   {t("try_platform")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
               </Link>
+
               <Link to="/loan-simulator">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="h-12 px-8 transition-all duration-200"
+                  className="h-16 px-12 text-lg font-semibold glass-effect border-white/20 text-white hover:text-white hover:bg-white/10 transition-all duration-300"
                 >
+                  <BarChart3 className="mr-3 h-5 w-5" />
                   {t("credit_calculator")}
                 </Button>
               </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-16 flex flex-wrap justify-center items-center gap-8 text-white/70">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                <span className="text-sm font-medium">Bank-Grade Security</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5" />
+                <span className="text-sm font-medium">ISO 27001 Certified</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Globe className="h-5 w-5" />
+                <span className="text-sm font-medium">4 Languages</span>
+              </div>
             </div>
           </div>
 
