@@ -366,6 +366,83 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Show the Money Section */}
+      <section className="relative py-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 via-green-800 to-teal-900"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+
+        {/* Floating Money Animation */}
+        <div className="absolute inset-0">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="money-rain text-4xl"
+              style={{
+                left: `${10 + i * 12}%`,
+                animationDelay: `${i * 1.5}s`,
+                animationDuration: `${8 + i}s`
+              }}
+            >
+              {['💰', '💸', '💵', '💴', '💶', '💷', '💳', '🏦'][i]}
+            </div>
+          ))}
+        </div>
+
+        <div className="container mx-auto text-center relative z-10">
+          <Badge className="mb-8 px-6 py-3 bg-emerald-500/20 text-emerald-300 border-emerald-400/30 text-lg">
+            💰 Financial Excellence
+          </Badge>
+
+          <h2 className="text-5xl md:text-7xl font-bold mb-8">
+            <span className="text-white">Show Me The</span>
+            <span className="wealth-indicator block mt-2 text-6xl md:text-8xl">MONEY</span>
+          </h2>
+
+          <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-16 leading-relaxed">
+            Experience the future of banking with real-time financial insights, premium analytics, and enterprise-grade money management solutions.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Revenue Growth */}
+            <div className="card-3d glass-effect p-8 rounded-3xl group">
+              <div className="text-6xl mb-4 group-hover:scale-110 transition-all duration-300">📈</div>
+              <div className="text-4xl font-bold text-emerald-400 mb-2 stats-glow">+247%</div>
+              <div className="text-white/80 text-lg">Revenue Growth</div>
+              <div className="text-white/60 text-sm mt-2">with BankGenie</div>
+            </div>
+
+            {/* Cost Savings */}
+            <div className="card-3d glass-effect p-8 rounded-3xl group">
+              <div className="text-6xl mb-4 group-hover:scale-110 transition-all duration-300">💸</div>
+              <div className="text-4xl font-bold text-yellow-400 mb-2 stats-glow">€2.4M</div>
+              <div className="text-white/80 text-lg">Cost Savings</div>
+              <div className="text-white/60 text-sm mt-2">annually per bank</div>
+            </div>
+
+            {/* Transaction Volume */}
+            <div className="card-3d glass-effect p-8 rounded-3xl group">
+              <div className="text-6xl mb-4 group-hover:scale-110 transition-all duration-300">🏦</div>
+              <div className="text-4xl font-bold text-blue-400 mb-2 stats-glow">€180B</div>
+              <div className="text-white/80 text-lg">Processed</div>
+              <div className="text-white/60 text-sm mt-2">transaction volume</div>
+            </div>
+          </div>
+
+          <div className="mt-16">
+            <Link to="/admin">
+              <Button
+                size="lg"
+                className="h-16 px-12 text-lg font-semibold premium-button border-0 text-white hover:text-white mr-4"
+              >
+                <TrendingUp className="mr-3 h-6 w-6" />
+                View Analytics Dashboard
+                <ArrowRight className="ml-3 h-6 w-6" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Target Users Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
