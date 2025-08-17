@@ -341,6 +341,23 @@
   }
 }
 
+@keyframes moneyRain {
+  0% {
+    transform: translateY(-100px) rotateZ(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(100vh) rotateZ(360deg);
+    opacity: 0;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
