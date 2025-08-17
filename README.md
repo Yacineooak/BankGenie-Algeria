@@ -265,17 +265,8 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming en
 
 ## 📞 Contact & Support
 
-### 🏢 **Headquarters**
-```
-BankGenie Technologies
-16 Rue Didouche Mourad
-16000 Alger Centre, Algiers, Algeria
-```
-
 ### 📧 **Get in Touch**
-- **General**: [info@bankgenie.com](mailto:info@bankgenie.com)
-- **Partnerships**: [partnerships@bankgenie.com](mailto:partnerships@bankgenie.com)
-- **Careers**: [careers@bankgenie.com](mailto:careers@bankgenie.com)
+- **Phone**: +213 541 09 59 03
 - **Support**: [support@bankgenie.com](mailto:support@bankgenie.com)
 
 ### 🌐 **Connect With Us**
@@ -295,7 +286,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 🌟 **Building the future of banking, one transaction at a time.**
 
-**Made with ❤️ in Algeria for the world**
+**Made with ❤️ in Algeria for the world by Yacine Khaldi**
 
 ![Algeria Flag](https://img.shields.io/badge/Made%20in-Algeria-green?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzAwNzAzQyIvPjxyZWN0IHg9IjYwIiB3aWR0aD0iNjAiIGhlaWdodD0iODAiIGZpbGw9IndoaXRlIi8+PC9zdmc+)
 
