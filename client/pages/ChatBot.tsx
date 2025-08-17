@@ -473,7 +473,7 @@ export default function ChatBot() {
         en: "Your Intelligent Banking Assistant",
       },
       connected_live: {
-        ar: "متصل مباشرة",
+        ar: "متص�� مباشرة",
         fr: "Connecté en direct",
         dz: "متصل م��اشرة",
         en: "Connected Live",
@@ -649,11 +649,18 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Enhanced Header */}
-        <Card className="mb-4 shadow-lg border-0">
-          <CardHeader className="bg-gradient-to-r from-primary to-blue-600 text-white rounded-t-lg">
+    <div className="min-h-screen gradient-bg-banking p-4 relative overflow-hidden">
+      {/* Floating Money Elements */}
+      <div className="absolute top-20 left-10 text-4xl opacity-10 money-float">💰</div>
+      <div className="absolute top-40 right-20 text-3xl opacity-10 money-float" style={{animationDelay: '2s'}}>💳</div>
+      <div className="absolute bottom-40 left-1/4 text-3xl opacity-10 money-float" style={{animationDelay: '4s'}}>🏦</div>
+      <div className="absolute top-60 right-1/3 text-4xl opacity-10 money-float" style={{animationDelay: '1s'}}>📈</div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Premium Header */}
+        <Card className="mb-6 card-3d border-0 overflow-hidden">
+          <CardHeader className="gradient-bg-premium text-white relative">
+            <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
