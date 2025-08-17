@@ -427,7 +427,7 @@ export default function ChatBot() {
     } catch (error) {
       console.error("Transaction history error:", error);
       addErrorMessage(
-        "نعتذر، لا يمكن الوصول لتاريخ العمليات حالياً. يرجى المحاو��ة لاحقاً.",
+        "نعتذر، لا يمكن الوصول ل��اريخ العمليات حالياً. يرجى المحاو��ة لاحقاً.",
       );
     }
   };
@@ -473,7 +473,7 @@ export default function ChatBot() {
         en: "Your Intelligent Banking Assistant",
       },
       connected_live: {
-        ar: "متص�� مباشرة",
+        ar: "متصل مباشرة",
         fr: "Connecté en direct",
         dz: "متصل م��اشرة",
         en: "Connected Live",
@@ -661,10 +661,10 @@ export default function ChatBot() {
         <Card className="mb-6 card-3d border-0 overflow-hidden">
           <CardHeader className="gradient-bg-premium text-white relative">
             <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                  <Bot className="h-7 w-7 text-white" />
+            <div className="flex items-center justify-between relative z-10">
+              <div className="flex items-center space-x-4">
+                <div className="h-16 w-16 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl flex items-center justify-center backdrop-blur-sm card-3d group">
+                  <Bot className="h-9 w-9 text-white group-hover:scale-110 transition-all duration-300" />
                 </div>
                 <div>
                   <CardTitle className="text-xl text-white transition-all duration-300">
@@ -999,7 +999,7 @@ export default function ChatBot() {
                 size="sm"
                 onClick={() => {
                   const queries = {
-                    ar: "أقرب فرع",
+                    ar: "أقر�� فرع",
                     fr: "agence proche",
                     dz: "أقرب فرع",
                     en: "nearest branch",
@@ -1058,7 +1058,7 @@ export default function ChatBot() {
                     <div>
                       <p className="text-green-800 font-medium">متصل بأمان</p>
                       <p className="text-green-700 text-sm">
-                        جميع خدماتك المصرفية متاحة
+                        جميع خدماتك المصر��ية متاحة
                       </p>
                     </div>
                   </div>
