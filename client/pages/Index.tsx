@@ -313,34 +313,51 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-10">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="border-border hover:shadow-lg transition-shadow"
+                className="card-3d glass-effect border-white/10 bg-white/5 group hover:bg-white/10 transition-all duration-500"
+                style={{animationDelay: `${index * 300}ms`}}
               >
-                <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <feature.icon className="h-5 w-5 text-primary" />
+                <CardHeader className="pb-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="h-16 w-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+                      <feature.icon className="h-8 w-8 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-xl">{feature.title}</CardTitle>
+                      <CardTitle className="text-2xl text-white font-bold mb-2">{feature.title}</CardTitle>
+                      <CardDescription className="text-lg text-white/80 leading-relaxed">
+                        {feature.description}
+                      </CardDescription>
                     </div>
                   </div>
-                  <CardDescription className="text-base mt-2">
-                    {feature.description}
-                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2">
+                  <ul className="space-y-4">
                     {feature.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-accent" />
-                        <span className="text-muted-foreground">{detail}</span>
+                      <li key={idx} className="flex items-center space-x-3 group/item">
+                        <div className="h-6 w-6 bg-green-500/20 rounded-full flex items-center justify-center group-hover/item:bg-green-500/40 transition-all duration-200">
+                          <CheckCircle className="h-4 w-4 text-green-400" />
+                        </div>
+                        <span className="text-white/70 group-hover/item:text-white transition-all duration-200">{detail}</span>
                       </li>
                     ))}
                   </ul>
+
+                  {/* Premium indicator */}
+                  <div className="mt-6 flex items-center justify-between">
+                    <div className="flex items-center space-x-2 text-blue-300">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span className="text-sm font-medium">Enterprise Ready</span>
+                    </div>
+                    <div className="text-white/50 text-sm">
+                      {index === 0 && '🤖 AI Powered'}
+                      {index === 1 && '🔒 Secure'}
+                      {index === 2 && '📊 Analytics'}
+                      {index === 3 && '💳 Payments'}
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
