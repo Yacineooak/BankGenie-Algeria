@@ -267,7 +267,7 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming en
 
 ### 📧 **Get in Touch**
 - **Phone**: +213 541 09 59 03
-- **Support**: [support@bankgenie.com](mailto:support@bankgenie.com)
+- **Support**: [stylebenderkh@gmail.com](mailto:stylebenderkh@gmail.com)
 
 ### 🌐 **Connect With Us**
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/company/bankgenie)
