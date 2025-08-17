@@ -175,6 +175,143 @@
     letter-spacing: 0.01em;
     word-spacing: 0.1em;
   }
+
+  /* 3D and Premium Effects */
+  .gradient-bg-premium {
+    background: linear-gradient(135deg,
+      #667eea 0%,
+      #764ba2 25%,
+      #f093fb 50%,
+      #f5576c 75%,
+      #4facfe 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  .gradient-bg-banking {
+    background: linear-gradient(135deg,
+      #1e3c72 0%,
+      #2a5298 25%,
+      #4facfe 50%,
+      #00f2fe 75%,
+      #667eea 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+  }
+
+  .card-3d {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    transition: all 0.3s ease;
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.1),
+      0 0 40px rgba(102, 126, 234, 0.1);
+  }
+
+  .card-3d:hover {
+    transform: perspective(1000px) rotateX(-5deg) rotateY(5deg) translateZ(20px);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 0 60px rgba(102, 126, 234, 0.2);
+  }
+
+  .money-float {
+    animation: moneyFloat 6s ease-in-out infinite;
+  }
+
+  .stats-glow {
+    text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    animation: statsGlow 2s ease-in-out infinite alternate;
+  }
+
+  .hero-gradient {
+    background: radial-gradient(ellipse at center,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.05) 50%,
+      transparent 100%);
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .premium-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+  }
+
+  .premium-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  }
+
+  .floating-elements::before {
+    content: '💰';
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-size: 3rem;
+    opacity: 0.1;
+    animation: moneyFloat 8s ease-in-out infinite;
+  }
+
+  .floating-elements::after {
+    content: '💎';
+    position: absolute;
+    top: 60%;
+    right: 8%;
+    font-size: 2.5rem;
+    opacity: 0.1;
+    animation: moneyFloat 6s ease-in-out infinite reverse;
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes moneyFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translateY(-20px) rotate(5deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-10px) rotate(-5deg);
+    opacity: 0.15;
+  }
+  75% {
+    transform: translateY(-30px) rotate(3deg);
+    opacity: 0.1;
+  }
+}
+
+@keyframes statsGlow {
+  0% {
+    text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    transform: scale(1);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+    transform: scale(1.02);
+  }
 }
 
 @layer base {
