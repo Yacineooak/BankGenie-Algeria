@@ -284,7 +284,7 @@ export default function ChatBot() {
     } catch (error) {
       console.error("Chat processing error:", error);
       addErrorMessage(
-        "الخدمة غير متاحة مؤقتاً. نعمل على ��صلاح المشكلة، يرجى المحاولة خلال دقائق.",
+        "الخدمة غير متاحة مؤقتاً. نعمل على ��صلاح المشكلة، يرجى المح��ولة خلال دقائق.",
       );
     } finally {
       setIsTyping(false);
@@ -427,7 +427,7 @@ export default function ChatBot() {
     } catch (error) {
       console.error("Transaction history error:", error);
       addErrorMessage(
-        "نعتذر، لا يمكن الوصول ل��اريخ العمليات حالياً. يرجى المحاو��ة لاحقاً.",
+        "نعتذر، لا يمكن الوصول لتاريخ العمليات حالياً. يرجى المحاو��ة لاحقاً.",
       );
     }
   };
@@ -760,9 +760,10 @@ export default function ChatBot() {
           </CardHeader>
         </Card>
 
-        {/* Enhanced Chat Interface */}
-        <Card className="h-[600px] flex flex-col shadow-lg border-0">
-          <CardContent className="flex-1 p-0">
+        {/* Premium Chat Interface */}
+        <Card className="h-[700px] flex flex-col card-3d glass-effect border-white/20 overflow-hidden">
+          <CardContent className="flex-1 p-0 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
             <ScrollArea className="h-full p-4">
               <div className="space-y-4">
                 {messages.map((message) => (
@@ -999,7 +1000,7 @@ export default function ChatBot() {
                 size="sm"
                 onClick={() => {
                   const queries = {
-                    ar: "أقر�� فرع",
+                    ar: "أقرب فرع",
                     fr: "agence proche",
                     dz: "أقرب فرع",
                     en: "nearest branch",
@@ -1034,7 +1035,7 @@ export default function ChatBot() {
                         تسجيل الدخول مطلوب
                       </p>
                       <p className="text-amber-700 text-sm">
-                        للوصول لجميع خدماتك المصرفية
+                        ��لوصول لجميع خدماتك المصرفية
                       </p>
                     </div>
                   </div>
@@ -1058,7 +1059,7 @@ export default function ChatBot() {
                     <div>
                       <p className="text-green-800 font-medium">متصل بأمان</p>
                       <p className="text-green-700 text-sm">
-                        جميع خدماتك المصر��ية متاحة
+                        جميع خدماتك المصرفية متاحة
                       </p>
                     </div>
                   </div>
