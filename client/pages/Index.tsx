@@ -295,16 +295,21 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4 bg-muted/50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Complete Banking Solution
+      {/* Premium Features Section */}
+      <section id="features" className="relative py-32 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+
+        <div className="container mx-auto relative z-10">
+          <div className="text-center mb-20">
+            <Badge className="mb-6 px-4 py-2 bg-blue-500/20 text-blue-300 border-blue-400/30">
+              🏆 Enterprise Features
+            </Badge>
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 gradient-text">
+              {t('complete_banking_solution')}
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything your financial institution needs to deliver exceptional
-              customer service
+            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+              {t('everything_description')}
             </p>
           </div>
 
